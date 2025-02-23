@@ -1,4 +1,4 @@
-import { PharmaTech } from '.'
+import { PharmaTech } from '../api'
 import { test, expect } from 'vitest'
 
 test('PharmaTech is running', () => {
