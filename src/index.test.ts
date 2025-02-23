@@ -1,5 +1,5 @@
-import { PharmaTech } from ".";
-import { test, expect } from "vitest";
+import { PharmaTech } from '.'
+import { test, expect } from 'vitest'
 
 test('PharmaTech is running', () => {
   const pharmaTech = new PharmaTech()
