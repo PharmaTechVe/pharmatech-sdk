@@ -1,6 +1,6 @@
 {
   "name": "@pharmatech/sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "PharmaTech Core API SDK",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -45,5 +45,8 @@
     "tsup": "^8.3.6",
     "typescript": "^5.7.3",
     "vitest": "^3.0.6"
+  },
+  "dependencies": {
+    "axios": "^1.8.1"
   }
 }

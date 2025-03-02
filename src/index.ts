@@ -1,3 +1,13 @@
-import { PharmaTech } from './api'
+import { AuthService } from './auth'
 
-export { PharmaTech }
+export class PharmaTech {
+  auth: AuthService
+
+  constructor() {
+    this.auth = new AuthService()
+  }
+
+  version(): string {
+    return '0.0.3'
+  }
+}

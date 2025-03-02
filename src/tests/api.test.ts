@@ -1,9 +1,9 @@
-import { PharmaTech } from '../api'
+import { PharmaTech } from '../index'
 import { test, expect } from 'vitest'
 
-test('PharmaTech is running', () => {
+test('PharmaTech is running', async () => {
   const pharmaTech = new PharmaTech()
   expect(pharmaTech).toBeDefined()
   const version = pharmaTech.version()
-  expect(version).toBe('0.0.1')
+  expect(version).toBe('0.0.3')
 })
