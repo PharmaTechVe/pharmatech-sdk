@@ -1,7 +1,7 @@
 import { AuthService } from './auth'
 
 export class PharmaTech {
-  public auth: AuthService
+  auth: AuthService
 
   constructor() {
     this.auth = new AuthService()

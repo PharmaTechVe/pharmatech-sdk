@@ -20,14 +20,14 @@ export class AuthService {
   async login({ email, password }: LoginRequest): Promise<LoginResponse> {
     try {
       const response = await this.client.post({
-        url: 'auth/login',
+        url: '/auth/login',
         data: {
           email,
           password,
         },
       })
 
-      if ('access' in response) {
+      if ('accessToken' in response) {
         return response as unknown as LoginResponse
       }
 
