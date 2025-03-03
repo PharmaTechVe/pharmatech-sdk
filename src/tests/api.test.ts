@@ -1,5 +1,17 @@
 import { PharmaTech } from '../index'
-import { test, expect } from 'vitest'
+import { test, expect, vi } from 'vitest'
+
+vi.mock('../client', () => {
+  return {
+    Client: vi.fn().mockImplementation(() => {
+      return {
+        post: vi.fn().mockResolvedValue({
+          accessToken: 'mockAccessToken',
+        }),
+      }
+    }),
+  }
+})
 
 test('PharmaTech is running', async () => {
   const pharmaTech = new PharmaTech()
@@ -16,5 +28,5 @@ test('AuthService login', async () => {
   })
 
   expect(loginResponse).toBeDefined()
-  expect(loginResponse.accessToken).toBeDefined()
+  expect(loginResponse.accessToken).toBe('mockAccessToken')
 })
