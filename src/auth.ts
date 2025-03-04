@@ -12,8 +12,8 @@ export type LoginResponse = {
 
 export class AuthService {
   private client: Client
-  constructor() {
-    this.client = new Client()
+  constructor(isDevMode: boolean) {
+    this.client = new Client(isDevMode)
     this.login = this.login.bind(this)
   }
 
