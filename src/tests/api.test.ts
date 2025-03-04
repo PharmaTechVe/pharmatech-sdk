@@ -14,14 +14,14 @@ vi.mock('../client', () => {
 })
 
 test('PharmaTech is running', async () => {
-  const pharmaTech = new PharmaTech()
+  const pharmaTech = new PharmaTech(true)
   expect(pharmaTech).toBeDefined()
   const version = pharmaTech.version()
-  expect(version).toBe('0.0.3')
+  expect(version).toBe('0.0.4')
 })
 
 test('AuthService login', async () => {
-  const pharmaTech = new PharmaTech()
+  const pharmaTech = new PharmaTech(true)
   const loginResponse = await pharmaTech.auth.login({
     email: 'test@example.com',
     password: 'password123',

@@ -3,11 +3,11 @@ import { AuthService } from './auth'
 export class PharmaTech {
   auth: AuthService
 
-  constructor() {
-    this.auth = new AuthService()
+  constructor(isDevMode: boolean) {
+    this.auth = new AuthService(isDevMode)
   }
 
   version(): string {
-    return '0.0.3'
+    return '0.0.4'
   }
 }
