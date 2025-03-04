@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from 'axios'
-import { BASE_URL } from './settings'
+import { BASE_URL, DEV_URL } from './settings'
 
 export type ClientConfig = {
   url: string
@@ -18,9 +18,9 @@ export type Pagination = {
 export class Client {
   private client: AxiosInstance
 
-  constructor() {
+  constructor(isDevMode: boolean) {
     this.client = axios.create({
-      baseURL: BASE_URL,
+      baseURL: isDevMode ? DEV_URL : BASE_URL,
       headers: {
         'Content-Type': 'application/json',
       },
