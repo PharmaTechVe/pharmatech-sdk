@@ -9,10 +9,7 @@ export class ProductService {
     this.getProducts = this.getProducts.bind(this)
   }
 
-  async getProducts({
-    page,
-    limit,
-  }: PaginationRequest): Promise<Pagination | void> {
+  async getProducts({ page, limit }: PaginationRequest): Promise<Pagination> {
     try {
       const response = await this.client.get({
         url: '/product',
@@ -30,6 +27,7 @@ export class ProductService {
           throw new Error(err.response.data.detail)
         }
       }
+      throw new Error('Error inesperado al obtener los productos.')
     }
   }
 }

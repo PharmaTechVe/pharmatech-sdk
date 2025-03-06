@@ -8,6 +8,12 @@ vi.mock('../client', () => {
         post: vi.fn().mockResolvedValue({
           accessToken: 'mockAccessToken',
         }),
+        get: vi.fn().mockResolvedValue({
+          results: [],
+          count: 0,
+          next: null,
+          previous: null,
+        }),
       }
     }),
   }
@@ -29,4 +35,11 @@ test('AuthService login', async () => {
 
   expect(loginResponse).toBeDefined()
   expect(loginResponse.accessToken).toBe('mockAccessToken')
+})
+
+test('ProductService getProducts', async () => {
+  const pharmaTech = new PharmaTech(true)
+  const products = await pharmaTech.product.getProducts({ page: 1, limit: 10 })
+
+  expect(products).toBeDefined()
 })
