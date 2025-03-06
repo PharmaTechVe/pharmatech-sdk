@@ -14,7 +14,7 @@ export class Client {
 
   constructor(isDevMode: boolean) {
     this.client = axios.create({
-      baseURL: isDevMode ? DEV_URL : BASE_URL,
+      baseURL: 'http://localhost:3000/', //isDevMode ? DEV_URL : BASE_URL,
       headers: {
         'Content-Type': 'application/json',
       },

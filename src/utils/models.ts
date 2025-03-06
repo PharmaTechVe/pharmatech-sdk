@@ -1,3 +1,7 @@
+export type PaginationRequest = {
+  page?: number
+  limit?: number
+}
 export type Pagination = {
   results: object[]
   count: number
