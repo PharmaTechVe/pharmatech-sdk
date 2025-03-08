@@ -1,18 +1,12 @@
 import axios, { type AxiosInstance } from 'axios'
 import { BASE_URL, DEV_URL } from './settings'
+import type { Pagination } from './utils/models'
 
 export type ClientConfig = {
   url: string
   jwt?: string
   data?: object
   params?: object
-}
-// TODO: fix pagination object
-export type Pagination = {
-  results: object[]
-  count: number
-  next: string | null
-  previous: string | null
 }
 
 export class Client {
