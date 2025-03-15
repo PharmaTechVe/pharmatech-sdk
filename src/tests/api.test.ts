@@ -43,3 +43,32 @@ test('ProductService getProducts', async () => {
 
   expect(products).toBeDefined()
 })
+
+test('AuthService sign-up', async () => {
+  const pharmaTech = new PharmaTech(true)
+
+  const signUpData = {
+    firstName: 'Jhony',
+    lastName: 'Test',
+    email: 'Jhony.test@example.com',
+    password: 'securePassword123',
+    documentId: '123456710423',
+    phoneNumber: '1234567890',
+  }
+
+  const expectedSignUpResponse = {
+    firstName: 'Jhony',
+    lastName: 'Test',
+    email: 'Jhony.test@example.com',
+    documentId: '123456710423',
+    phoneNumber: '1234567890',
+  }
+
+  ;(pharmaTech.auth as any).client.post.mockResolvedValue(
+    expectedSignUpResponse,
+  )
+
+  const signUpResponse = await pharmaTech.auth.signUp(signUpData)
+
+  expect(signUpResponse).toEqual(expectedSignUpResponse)
+})
