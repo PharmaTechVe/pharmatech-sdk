@@ -20,11 +20,17 @@ export type SignUpRequest = {
 }
 
 export type SignUpResponse = {
+  id: string
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date
   firstName: string
   lastName: string
   email: string
   documentId: string
   phoneNumber: string
+  lastOrderDate: Date
+  role: string
 }
 
 export class AuthService {
