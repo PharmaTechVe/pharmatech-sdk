@@ -21,10 +21,7 @@ export class Client {
     })
   }
 
-  async call(
-    method: string,
-    config: ClientConfig,
-  ): Promise<Response | Pagination> {
+  async call(method: string, config: ClientConfig): Promise<Response> {
     if (config.jwt) {
       this.client.interceptors.request.use((axiosConfig) => {
         if (axiosConfig.headers) {
@@ -52,7 +49,7 @@ export class Client {
     if (isPaginated) {
       const response = await this.call('get', config)
       if ('results' in response) {
-        const data: Pagination = response
+        const data: Pagination<any> = response as unknown as Pagination<any>
         return {
           results: data.results,
           count: data.count,

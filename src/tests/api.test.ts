@@ -1,3 +1,4 @@
+import { UserGender } from '../auth'
 import { PharmaTech } from '../index'
 import { test, expect, vi } from 'vitest'
 
@@ -14,6 +15,7 @@ vi.mock('../client', () => {
           next: null,
           previous: null,
         }),
+        patch: vi.fn().mockResolvedValue(undefined),
       }
     }),
   }
@@ -54,6 +56,8 @@ test('AuthService sign-up', async () => {
     password: 'securePassword123',
     documentId: '123456710423',
     phoneNumber: '1234567890',
+    birthDate: new Date('2000-01-01'),
+    gender: UserGender.MALE,
   }
 
   const expectedSignUpResponse = {
@@ -71,4 +75,18 @@ test('AuthService sign-up', async () => {
   const signUpResponse = await pharmaTech.auth.signUp(signUpData)
 
   expect(signUpResponse).toEqual(expectedSignUpResponse)
+})
+
+test('Update password', async () => {
+  const pharmaTech = new PharmaTech(true)
+  const token = await pharmaTech.auth.login({
+    email: 'andres15alvarez@gmail.com',
+    password: 'pharmatech',
+  })
+  ;(pharmaTech.auth as any).client.patch.mockResolvedValue(undefined)
+  const response = await pharmaTech.auth.updatePassword(
+    'pharmatech',
+    token.accessToken,
+  )
+  expect(response).toBeUndefined()
 })
