@@ -25,7 +25,7 @@ test('PharmaTech is running', async () => {
   const pharmaTech = new PharmaTech(true)
   expect(pharmaTech).toBeDefined()
   const version = pharmaTech.version()
-  expect(version).toBe('0.1.0')
+  expect(version).toBe('0.2.0')
 })
 
 test('AuthService login', async () => {
@@ -56,7 +56,7 @@ test('AuthService sign-up', async () => {
     password: 'securePassword123',
     documentId: '123456710423',
     phoneNumber: '1234567890',
-    birthDate: new Date('2000-01-01'),
+    birthDate: '2000-01-01',
     gender: UserGender.MALE,
   }
 

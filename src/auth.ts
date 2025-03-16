@@ -22,7 +22,7 @@ export type SignUpRequest = {
   password: string
   documentId: string
   phoneNumber: string
-  birthDate: Date
+  birthDate: string
   gender: UserGender
 }
 
@@ -86,6 +86,12 @@ export class AuthService {
   }
 
   async signUp(signUpData: SignUpRequest): Promise<SignUpResponse> {
+    const birthDateRegex = /^\d{4}-\d{2}-\d{2}$/
+    if (!birthDateRegex.test(signUpData.birthDate)) {
+      throw new Error(
+        'La fecha de nacimiento debe estar en el formato YYYY-MM-DD.',
+      )
+    }
     try {
       const response = await this.client.post({
         url: '/auth/signup',
