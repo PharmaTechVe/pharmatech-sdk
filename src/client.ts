@@ -1,18 +1,12 @@
 import axios, { type AxiosInstance } from 'axios'
 import { BASE_URL, DEV_URL } from './settings'
+import type { Pagination } from './utils/models'
 
 export type ClientConfig = {
   url: string
   jwt?: string
   data?: object
   params?: object
-}
-// TODO: fix pagination object
-export type Pagination = {
-  results: object[]
-  count: number
-  next: string | null
-  previous: string | null
 }
 
 export class Client {
@@ -27,10 +21,7 @@ export class Client {
     })
   }
 
-  async call(
-    method: string,
-    config: ClientConfig,
-  ): Promise<Response | Pagination> {
+  async call(method: string, config: ClientConfig): Promise<Response> {
     if (config.jwt) {
       this.client.interceptors.request.use((axiosConfig) => {
         if (axiosConfig.headers) {
@@ -58,7 +49,7 @@ export class Client {
     if (isPaginated) {
       const response = await this.call('get', config)
       if ('results' in response) {
-        const data: Pagination = response
+        const data: Pagination<any> = response as unknown as Pagination<any>
         return {
           results: data.results,
           count: data.count,

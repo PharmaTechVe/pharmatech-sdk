@@ -1,3 +1,4 @@
+import { UserGender } from '../auth'
 import { PharmaTech } from '../index'
 import { test, expect, vi } from 'vitest'
 
@@ -8,6 +9,13 @@ vi.mock('../client', () => {
         post: vi.fn().mockResolvedValue({
           accessToken: 'mockAccessToken',
         }),
+        get: vi.fn().mockResolvedValue({
+          results: [],
+          count: 0,
+          next: null,
+          previous: null,
+        }),
+        patch: vi.fn().mockResolvedValue(undefined),
       }
     }),
   }
@@ -17,7 +25,7 @@ test('PharmaTech is running', async () => {
   const pharmaTech = new PharmaTech(true)
   expect(pharmaTech).toBeDefined()
   const version = pharmaTech.version()
-  expect(version).toBe('0.1.0')
+  expect(version).toBe('0.2.0')
 })
 
 test('AuthService login', async () => {
@@ -29,4 +37,56 @@ test('AuthService login', async () => {
 
   expect(loginResponse).toBeDefined()
   expect(loginResponse.accessToken).toBe('mockAccessToken')
+})
+
+test('ProductService getProducts', async () => {
+  const pharmaTech = new PharmaTech(true)
+  const products = await pharmaTech.product.getProducts({ page: 1, limit: 10 })
+
+  expect(products).toBeDefined()
+})
+
+test('AuthService sign-up', async () => {
+  const pharmaTech = new PharmaTech(true)
+
+  const signUpData = {
+    firstName: 'Jhony',
+    lastName: 'Test',
+    email: 'Jhony.test@example.com',
+    password: 'securePassword123',
+    documentId: '123456710423',
+    phoneNumber: '1234567890',
+    birthDate: '2000-01-01',
+    gender: UserGender.MALE,
+  }
+
+  const expectedSignUpResponse = {
+    firstName: 'Jhony',
+    lastName: 'Test',
+    email: 'Jhony.test@example.com',
+    documentId: '123456710423',
+    phoneNumber: '1234567890',
+  }
+
+  ;(pharmaTech.auth as any).client.post.mockResolvedValue(
+    expectedSignUpResponse,
+  )
+
+  const signUpResponse = await pharmaTech.auth.signUp(signUpData)
+
+  expect(signUpResponse).toEqual(expectedSignUpResponse)
+})
+
+test('Update password', async () => {
+  const pharmaTech = new PharmaTech(true)
+  const token = await pharmaTech.auth.login({
+    email: 'andres15alvarez@gmail.com',
+    password: 'pharmatech',
+  })
+  ;(pharmaTech.auth as any).client.patch.mockResolvedValue(undefined)
+  const response = await pharmaTech.auth.updatePassword(
+    'pharmatech',
+    token.accessToken,
+  )
+  expect(response).toBeUndefined()
 })
