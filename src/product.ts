@@ -9,7 +9,6 @@ import type {
 
 export type Manufacturer = BaseModel & { name: string; description: string }
 export type Image = BaseModel & { url: string }
-export type Lot = BaseModel & { expirationDate: string }
 export type Category = UUIDModel & { name: string; description: string }
 export type Presentation = BaseModel & {
   name: string
@@ -17,21 +16,21 @@ export type Presentation = BaseModel & {
   quantity: number
   measurementUnit: string
 }
-export type Presentations = BaseModel & {
-  price: number
-  presentation: Presentation
-}
 
-export type ProductResponse = BaseModel & {
+export type Product = BaseModel & {
   name: string
   genericName: string
   description: string
   priority: number
   manufacturer: Manufacturer
   images: Image[]
-  lot: Lot[]
   categories: Category[]
-  presentations: Presentations[]
+}
+
+export type ProductPresentation = BaseModel & {
+  price: number
+  presentation: Presentation
+  product: Product
 }
 
 export class ProductService {
@@ -43,8 +42,8 @@ export class ProductService {
 
   async getProducts({
     page,
-    limit,
-  }: PaginationRequest): Promise<Pagination<ProductResponse>> {
+    limit = 10,
+  }: PaginationRequest): Promise<Pagination<ProductPresentation>> {
     try {
       const response = await this.client.get({
         url: '/product',
@@ -52,7 +51,7 @@ export class ProductService {
       })
 
       if ('results' in response) {
-        return response as unknown as Pagination<ProductResponse>
+        return response as unknown as Pagination<ProductPresentation>
       }
 
       throw new Error('La respuesta del servidor no es válida.')
