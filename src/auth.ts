@@ -21,9 +21,9 @@ export type SignUpRequest = {
   email: string
   password: string
   documentId: string
-  phoneNumber: string
+  phoneNumber?: string | null
   birthDate: string
-  gender: UserGender
+  gender?: UserGender | null
 }
 
 export type SignUpResponse = {
