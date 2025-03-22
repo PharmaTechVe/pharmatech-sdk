@@ -21,9 +21,9 @@ export type SignUpRequest = {
   email: string
   password: string
   documentId: string
-  phoneNumber: string
+  phoneNumber?: string | null
   birthDate: string
-  gender: UserGender
+  gender?: UserGender | null
 }
 
 export type SignUpResponse = {
@@ -49,6 +49,7 @@ export class AuthService {
     this.forgotPassword = this.forgotPassword.bind(this)
     this.resetPassword = this.resetPassword.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
+    this.validateOtp = this.validateOtp.bind(this)
   }
 
   async login({ email, password }: LoginRequest): Promise<LoginResponse> {
@@ -163,6 +164,23 @@ export class AuthService {
         }
       }
       throw new Error('Error actualizando la contraseña.')
+    }
+  }
+
+  async validateOtp(otp: string, jwt: string): Promise<void> {
+    try {
+      await this.client.post({
+        url: '/otp',
+        data: { otp },
+        jwt,
+      })
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (err.response?.data?.detail) {
+          throw new Error(err.response.data.detail)
+        }
+      }
+      throw new Error('Error validando el OTP.')
     }
   }
 }
