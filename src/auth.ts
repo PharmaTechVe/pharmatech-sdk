@@ -165,4 +165,21 @@ export class AuthService {
       throw new Error('Error actualizando la contraseña.')
     }
   }
+
+  async validateOtp(otp: string, jwt: string): Promise<void> {
+    try {
+      await this.client.post({
+        url: '/otp',
+        data: { otp },
+        jwt,
+      })
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (err.response?.data?.detail) {
+          throw new Error(err.response.data.detail)
+        }
+      }
+      throw new Error('Error validando el OTP.')
+    }
+  }
 }
