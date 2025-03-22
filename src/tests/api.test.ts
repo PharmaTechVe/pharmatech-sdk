@@ -55,9 +55,9 @@ test('AuthService sign-up', async () => {
     email: 'Jhony.test@example.com',
     password: 'securePassword123',
     documentId: '123456710423',
-    phoneNumber: '1234567890',
+    phoneNumber: null,
     birthDate: '2000-01-01',
-    gender: UserGender.MALE,
+    gender: null,
   }
 
   const expectedSignUpResponse = {
@@ -65,7 +65,7 @@ test('AuthService sign-up', async () => {
     lastName: 'Test',
     email: 'Jhony.test@example.com',
     documentId: '123456710423',
-    phoneNumber: '1234567890',
+    phoneNumber: null,
   }
 
   ;(pharmaTech.auth as any).client.post.mockResolvedValue(
