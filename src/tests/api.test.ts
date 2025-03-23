@@ -90,3 +90,33 @@ test('Update password', async () => {
   )
   expect(response).toBeUndefined()
 })
+
+test('UserService getProfile', async () => {
+  const pharmaTech = new PharmaTech(true)
+
+  const ProfileResponse = {
+    firstName: 'Jhony',
+    lastName: 'Test',
+    email: 'Jhony.test2@example.com',
+    documentId: '2',
+    phoneNumber: null,
+    birthDate: '2025-03-02',
+    gender: null,
+    profilePicture: null,
+    role: 'customer',
+  }
+
+  ;(pharmaTech.user as any).client.get.mockResolvedValueOnce(ProfileResponse)
+
+  const profile = await pharmaTech.user.getProfile(
+    '3efe4c87-6029-431b-8250-b3c695ec9397',
+  )
+  expect(profile).toEqual(ProfileResponse)
+})
+
+test('UserService getUsers', async () => {
+  const pharmaTech = new PharmaTech(true)
+  const users = await pharmaTech.user.getUsers({ page: 1, limit: 10 })
+
+  expect(users).toBeDefined()
+})
