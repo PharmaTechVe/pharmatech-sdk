@@ -2,6 +2,7 @@ import { AuthService } from './auth'
 import { Client } from './client'
 import { CountryService } from './country'
 import { ProductService } from './product'
+import { StateService } from './state'
 import { UserService } from './user'
 
 export class PharmaTech {
@@ -11,6 +12,7 @@ export class PharmaTech {
   product: ProductService
   user: UserService
   country: CountryService
+  state: StateService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -21,6 +23,7 @@ export class PharmaTech {
     this.product = new ProductService(this.client)
     this.user = new UserService(this.client)
     this.country = new CountryService(this.client)
+    this.state = new StateService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {

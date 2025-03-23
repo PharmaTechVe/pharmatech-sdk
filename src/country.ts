@@ -5,7 +5,7 @@ export type Country = {
   name: string
 }
 
-export type CountryRespose = Country & {
+export type CountryResponse = Country & {
   id: string
 }
 
@@ -21,46 +21,46 @@ export class CountryService {
     this.deleteCountry = this.deleteCountry.bind(this)
   }
 
-  async getCountryById(id: string, jwt: string): Promise<Country> {
+  async getCountryById(id: string, jwt: string): Promise<CountryResponse> {
     const response = await this.client.get({
       url: `/country/${id}`,
       jwt,
     })
-    return response as unknown as Country
+    return response as unknown as CountryResponse
   }
 
   async findAllCountries(
     { page = 1, limit = 10 }: PaginationRequest,
     jwt: string,
-  ): Promise<Pagination<Country>> {
+  ): Promise<Pagination<CountryResponse>> {
     const response = await this.client.get({
       url: '/country',
       params: { page, limit },
       jwt,
     })
-    return response as Pagination<Country>
+    return response as Pagination<CountryResponse>
   }
 
-  async createCountry(country: Country, jwt: string): Promise<Country> {
+  async createCountry(country: Country, jwt: string): Promise<CountryResponse> {
     const response = await this.client.post({
       url: '/country',
       data: country,
       jwt,
     })
-    return response as unknown as Country
+    return response as unknown as CountryResponse
   }
 
   async updateCountry(
     id: string,
     partialCountry: Partial<Country>,
     jwt: string,
-  ): Promise<Country> {
+  ): Promise<CountryResponse> {
     const response = await this.client.patch({
       url: `/country/${id}`,
       data: partialCountry,
       jwt,
     })
-    return response as unknown as Country
+    return response as unknown as CountryResponse
   }
 
   async deleteCountry(id: string, jwt: string): Promise<void> {
