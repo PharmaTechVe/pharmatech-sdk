@@ -1,4 +1,5 @@
 import { AuthService } from './auth'
+import { BranchService } from './branch'
 import { Client } from './client'
 import { CountryService } from './country'
 import { ProductService } from './product'
@@ -13,6 +14,7 @@ export class PharmaTech {
   user: UserService
   country: CountryService
   state: StateService
+  branch: BranchService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -24,6 +26,7 @@ export class PharmaTech {
     this.user = new UserService(this.client)
     this.country = new CountryService(this.client)
     this.state = new StateService(this.client)
+    this.branch = new BranchService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
