@@ -1,5 +1,4 @@
 import { Client } from './client'
-import axios from 'axios'
 
 export enum UserGender {
   MALE = 'm',
@@ -42,8 +41,8 @@ export type SignUpResponse = {
 
 export class AuthService {
   private client: Client
-  constructor(isDevMode: boolean) {
-    this.client = new Client(isDevMode)
+  constructor(client: Client) {
+    this.client = client
     this.login = this.login.bind(this)
     this.signUp = this.signUp.bind(this)
     this.forgotPassword = this.forgotPassword.bind(this)
@@ -53,37 +52,14 @@ export class AuthService {
   }
 
   async login({ email, password }: LoginRequest): Promise<LoginResponse> {
-    try {
-      const response = await this.client.post({
-        url: '/auth/login',
-        data: {
-          email,
-          password,
-        },
-      })
-
-      if ('accessToken' in response) {
-        return response as unknown as LoginResponse
-      }
-
-      throw new Error('La respuesta del servidor no es válida.')
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response?.status === 401) {
-          throw new Error(
-            'Error usuario/credenciales no validas. Verifique su usuario y contraseña ingresadas.',
-          )
-        }
-
-        if (err.response?.data?.detail) {
-          throw new Error(err.response.data.detail)
-        }
-      }
-
-      throw new Error(
-        'Error usuario/credenciales no validas. Verifique su usuario y contraseña ingresadas.',
-      )
-    }
+    const response = await this.client.post({
+      url: '/auth/login',
+      data: {
+        email,
+        password,
+      },
+    })
+    return response as unknown as LoginResponse
   }
 
   async signUp(signUpData: SignUpRequest): Promise<SignUpResponse> {
@@ -93,94 +69,47 @@ export class AuthService {
         'La fecha de nacimiento debe estar en el formato YYYY-MM-DD.',
       )
     }
-    try {
-      const response = await this.client.post({
-        url: '/auth/signup',
-        data: signUpData,
-      })
-      return response as unknown as SignUpResponse
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response?.data?.detail) {
-          throw new Error(err.response.data.detail)
-        }
-      }
-      throw new Error(
-        'Error registrando el usuario. Verifique la información ingresada.',
-      )
-    }
+    const response = await this.client.post({
+      url: '/auth/signup',
+      data: signUpData,
+    })
+    return response as unknown as SignUpResponse
   }
 
   async forgotPassword(email: string): Promise<void> {
-    try {
-      await this.client.post({
-        url: '/auth/forgot-password',
-        data: {
-          email,
-        },
-      })
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response?.data?.detail) {
-          throw new Error(err.response.data.detail)
-        }
-      }
-      throw new Error('Error solicitando cambio de contraseña.')
-    }
+    await this.client.post({
+      url: '/auth/forgot-password',
+      data: {
+        email,
+      },
+    })
   }
 
   async resetPassword(otp: string): Promise<LoginResponse> {
-    try {
-      const response = await this.client.post({
-        url: '/auth/reset-password',
-        data: {
-          otp,
-        },
-      })
-      return response as unknown as LoginResponse
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response?.data?.detail) {
-          throw new Error(err.response.data.detail)
-        }
-      }
-      throw new Error('Error reseteando la contraseña.')
-    }
+    const response = await this.client.post({
+      url: '/auth/reset-password',
+      data: {
+        otp,
+      },
+    })
+    return response as unknown as LoginResponse
   }
 
   async updatePassword(password: string, jwt: string): Promise<void> {
-    try {
-      await this.client.patch({
-        url: '/auth/password',
-        data: {
-          password,
-        },
-        jwt,
-      })
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response?.data?.detail) {
-          throw new Error(err.response.data.detail)
-        }
-      }
-      throw new Error('Error actualizando la contraseña.')
-    }
+    await this.client.patch({
+      url: '/auth/password',
+      data: {
+        password,
+      },
+      jwt,
+    })
   }
 
   async validateOtp(otp: string, jwt: string): Promise<void> {
-    try {
-      await this.client.post({
-        url: '/otp',
-        data: { otp },
-        jwt,
-      })
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response?.data?.detail) {
-          throw new Error(err.response.data.detail)
-        }
-      }
-      throw new Error('Error validando el OTP.')
-    }
+    await this.client.post({
+      url: '/otp',
+      data: { otp },
+      jwt,
+    })
   }
 }
