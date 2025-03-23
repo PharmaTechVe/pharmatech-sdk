@@ -36,6 +36,7 @@ export class UserService {
   constructor(client: Client) {
     this.client = client
     this.getProfile = this.getProfile.bind(this)
+    this.findAll = this.findAll.bind(this)
   }
 
   async getProfile(userId: string): Promise<ProfileResponse> {
@@ -45,7 +46,7 @@ export class UserService {
     return response as unknown as ProfileResponse
   }
 
-  async getUsers({
+  async findAll({
     page,
     limit = 10,
   }: PaginationRequest): Promise<Pagination<UserList>> {

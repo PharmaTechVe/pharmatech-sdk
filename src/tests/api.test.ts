@@ -114,9 +114,9 @@ test('UserService getProfile', async () => {
   expect(profile).toEqual(ProfileResponse)
 })
 
-test('UserService getUsers', async () => {
+test('UserService findAll', async () => {
   const pharmaTech = new PharmaTech(true)
-  const users = await pharmaTech.user.getUsers({ page: 1, limit: 10 })
+  const users = await pharmaTech.user.findAll({ page: 1, limit: 10 })
 
   expect(users).toBeDefined()
 })

@@ -22,14 +22,14 @@ export class StateService {
 
   constructor(client: Client) {
     this.client = client
-    this.getStateById = this.getStateById.bind(this)
-    this.findAllStates = this.findAllStates.bind(this)
-    this.createState = this.createState.bind(this)
-    this.updateState = this.updateState.bind(this)
-    this.deleteState = this.deleteState.bind(this)
+    this.getById = this.getById.bind(this)
+    this.findAll = this.findAll.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
-  async getStateById(id: string, jwt: string): Promise<StateResponse> {
+  async getById(id: string, jwt: string): Promise<StateResponse> {
     const response = await this.client.get({
       url: `/state/${id}`,
       jwt,
@@ -37,7 +37,7 @@ export class StateService {
     return response as unknown as StateResponse
   }
 
-  async findAllStates(
+  async findAll(
     { page = 1, limit = 10, countryId }: StatePaginationRequest,
     jwt: string,
   ): Promise<Pagination<StateResponse>> {
@@ -49,7 +49,7 @@ export class StateService {
     return response as Pagination<StateResponse>
   }
 
-  async createState(state: State, jwt: string): Promise<StateResponse> {
+  async create(state: State, jwt: string): Promise<StateResponse> {
     const response = await this.client.post({
       url: '/state',
       data: state,
@@ -58,7 +58,7 @@ export class StateService {
     return response as unknown as StateResponse
   }
 
-  async updateState(
+  async update(
     id: string,
     partialState: Partial<State>,
     jwt: string,
@@ -71,7 +71,7 @@ export class StateService {
     return response as unknown as StateResponse
   }
 
-  async deleteState(id: string, jwt: string): Promise<void> {
+  async delete(id: string, jwt: string): Promise<void> {
     await this.client.delete({
       url: `/states/${id}`,
       jwt,

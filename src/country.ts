@@ -14,14 +14,14 @@ export class CountryService {
 
   constructor(client: Client) {
     this.client = client
-    this.getCountryById = this.getCountryById.bind(this)
-    this.findAllCountries = this.findAllCountries.bind(this)
-    this.createCountry = this.createCountry.bind(this)
-    this.updateCountry = this.updateCountry.bind(this)
-    this.deleteCountry = this.deleteCountry.bind(this)
+    this.getById = this.getById.bind(this)
+    this.findAll = this.findAll.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
-  async getCountryById(id: string, jwt: string): Promise<CountryResponse> {
+  async getById(id: string, jwt: string): Promise<CountryResponse> {
     const response = await this.client.get({
       url: `/country/${id}`,
       jwt,
@@ -29,7 +29,7 @@ export class CountryService {
     return response as unknown as CountryResponse
   }
 
-  async findAllCountries(
+  async findAll(
     { page = 1, limit = 10 }: PaginationRequest,
     jwt: string,
   ): Promise<Pagination<CountryResponse>> {
@@ -41,7 +41,7 @@ export class CountryService {
     return response as Pagination<CountryResponse>
   }
 
-  async createCountry(country: Country, jwt: string): Promise<CountryResponse> {
+  async create(country: Country, jwt: string): Promise<CountryResponse> {
     const response = await this.client.post({
       url: '/country',
       data: country,
@@ -50,7 +50,7 @@ export class CountryService {
     return response as unknown as CountryResponse
   }
 
-  async updateCountry(
+  async update(
     id: string,
     partialCountry: Partial<Country>,
     jwt: string,
@@ -63,7 +63,7 @@ export class CountryService {
     return response as unknown as CountryResponse
   }
 
-  async deleteCountry(id: string, jwt: string): Promise<void> {
+  async delete(id: string, jwt: string): Promise<void> {
     await this.client.delete({
       url: `/country/${id}`,
       jwt,
