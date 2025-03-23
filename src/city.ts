@@ -29,22 +29,21 @@ export class CityService {
     this.delete = this.delete.bind(this)
   }
 
-  async getById(id: string, jwt: string): Promise<CityResponse> {
+  async getById(id: string): Promise<CityResponse> {
     const response = await this.client.get({
       url: `/city/${id}`,
-      jwt,
     })
     return response as unknown as CityResponse
   }
 
-  async findAll(
-    { page = 1, limit = 10, stateId }: CityPaginationRequest,
-    jwt: string,
-  ): Promise<Pagination<CityResponse>> {
+  async findAll({
+    page = 1,
+    limit = 10,
+    stateId,
+  }: CityPaginationRequest): Promise<Pagination<CityResponse>> {
     const response = await this.client.get({
       url: '/city',
       params: { page, limit, stateId },
-      jwt,
     })
     return response as Pagination<CityResponse>
   }

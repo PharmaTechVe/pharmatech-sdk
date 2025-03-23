@@ -21,22 +21,20 @@ export class CountryService {
     this.delete = this.delete.bind(this)
   }
 
-  async getById(id: string, jwt: string): Promise<CountryResponse> {
+  async getById(id: string): Promise<CountryResponse> {
     const response = await this.client.get({
       url: `/country/${id}`,
-      jwt,
     })
     return response as unknown as CountryResponse
   }
 
-  async findAll(
-    { page = 1, limit = 10 }: PaginationRequest,
-    jwt: string,
-  ): Promise<Pagination<CountryResponse>> {
+  async findAll({
+    page = 1,
+    limit = 10,
+  }: PaginationRequest): Promise<Pagination<CountryResponse>> {
     const response = await this.client.get({
       url: '/country',
       params: { page, limit },
-      jwt,
     })
     return response as Pagination<CountryResponse>
   }

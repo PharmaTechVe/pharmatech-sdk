@@ -1,6 +1,6 @@
 import type { CityResponse } from './city'
 import type { Client } from './client'
-import type { Pagination, PaginationRequest } from './utils/models'
+import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
 
 export type Branch = {
   name: string
@@ -13,10 +13,10 @@ export type CreateBranchRequest = Branch & {
   cityId: string
 }
 
-export type BranchResponse = Branch & {
-  id: string
-  city: CityResponse
-}
+export type BranchResponse = Branch &
+  BaseModel & {
+    city: CityResponse
+  }
 
 export class BranchService {
   private client: Client
