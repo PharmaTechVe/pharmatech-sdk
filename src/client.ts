@@ -1,6 +1,14 @@
 import axios, { type AxiosInstance } from 'axios'
 import { BASE_URL, DEV_URL } from './settings'
 import type { Pagination } from './utils/models'
+import {
+  BadRequestError,
+  ForbiddenError,
+  InternalServerError,
+  NotFoundError,
+  UnauthorizedError,
+  type APIError,
+} from './errors'
 
 export type ClientConfig = {
   url: string
@@ -39,8 +47,23 @@ export class Client {
       })
       return response.data
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as APIError
+        switch (axiosError.status) {
+          case 400:
+            throw new BadRequestError(axiosError.response?.data.message)
+          case 401:
+            throw new UnauthorizedError()
+          case 403:
+            throw new ForbiddenError()
+          case 404:
+            throw new NotFoundError(axiosError.response?.data.message[0])
+          default:
+            throw new InternalServerError(axiosError.response?.data.message[0])
+        }
+      }
+      throw new Error('Something went wrong with the request')
     }
   }
 
