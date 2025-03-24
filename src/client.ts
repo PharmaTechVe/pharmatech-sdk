@@ -20,12 +20,16 @@ export type ClientConfig = {
 export class Client {
   private client: AxiosInstance
 
-  constructor(isDevMode: boolean) {
+  constructor(isDevMode: boolean, origin?: string) {
+    let headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    }
+    if (origin) {
+      headers['Origin'] = origin
+    }
     this.client = axios.create({
       baseURL: isDevMode ? DEV_URL : BASE_URL,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
     })
   }
 
