@@ -25,8 +25,8 @@ export class PharmaTech {
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
    */
-  constructor(isDevMode: boolean) {
-    this.client = new Client(isDevMode)
+  constructor(isDevMode: boolean, origin?: string) {
+    this.client = new Client(isDevMode, origin)
     this.auth = new AuthService(this.client)
     this.product = new ProductService(this.client)
     this.user = new UserService(this.client)
@@ -46,6 +46,6 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.3.0'
+    return '0.3.1'
   }
 }
