@@ -24,7 +24,7 @@ export class PromoService {
 
   async getById(id: string, jwt: string): Promise<PromoResponse> {
     const response = await this.client.get({
-      url: `/promos/${id}`,
+      url: `/promo/${id}`,
       jwt,
     })
     return response as unknown as PromoResponse
@@ -35,7 +35,7 @@ export class PromoService {
     jwt: string,
   ): Promise<Pagination<PromoResponse>> {
     const response = await this.client.get({
-      url: '/promos',
+      url: '/promo',
       params: { page, limit },
       jwt,
     })
@@ -44,7 +44,7 @@ export class PromoService {
 
   async create(promo: Promo, jwt: string): Promise<PromoResponse> {
     const response = await this.client.post({
-      url: '/promos',
+      url: '/promo',
       data: promo,
       jwt,
     })
@@ -57,7 +57,7 @@ export class PromoService {
     jwt: string,
   ): Promise<PromoResponse> {
     const response = await this.client.patch({
-      url: `/promos/${id}`,
+      url: `/promo/${id}`,
       data: partialPromo,
       jwt,
     })
@@ -66,7 +66,7 @@ export class PromoService {
 
   async delete(id: string, jwt: string): Promise<void> {
     await this.client.delete({
-      url: `/promos/${id}`,
+      url: `/promo/${id}`,
       jwt,
     })
   }
