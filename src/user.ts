@@ -39,20 +39,22 @@ export class UserService {
     this.findAll = this.findAll.bind(this)
   }
 
-  async getProfile(userId: string): Promise<ProfileResponse> {
+  async getProfile(userId: string, jwt: string): Promise<ProfileResponse> {
     const response = await this.client.get({
       url: `/user/${userId}`,
+      jwt,
     })
     return response as unknown as ProfileResponse
   }
 
-  async findAll({
-    page,
-    limit = 10,
-  }: PaginationRequest): Promise<Pagination<UserList>> {
+  async findAll(
+    { page, limit = 10 }: PaginationRequest,
+    jwt: string,
+  ): Promise<Pagination<UserList>> {
     const response = await this.client.get({
       url: '/user',
       params: { page, limit },
+      jwt,
     })
     return response as unknown as Pagination<UserList>
   }
