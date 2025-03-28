@@ -3,6 +3,7 @@ import { BranchService } from './branch'
 import { CategoryService } from './category'
 import { Client } from './client'
 import { CountryService } from './country'
+import { GenericProductService } from './generic-product'
 import { ManufacturerService } from './manufacturer'
 import { PresentationService } from './presentation'
 import { ProductService } from './product'
@@ -21,6 +22,7 @@ export class PharmaTech {
   category: CategoryService
   presentation: PresentationService
   manufacturer: ManufacturerService
+  genericProduct: GenericProductService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -36,6 +38,7 @@ export class PharmaTech {
     this.category = new CategoryService(this.client)
     this.presentation = new PresentationService(this.client)
     this.manufacturer = new ManufacturerService(this.client)
+    this.genericProduct = new GenericProductService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
