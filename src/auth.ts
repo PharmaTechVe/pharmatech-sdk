@@ -49,6 +49,7 @@ export class AuthService {
     this.resetPassword = this.resetPassword.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
     this.validateOtp = this.validateOtp.bind(this)
+    this.resendOtp = this.resendOtp.bind(this)
   }
 
   async login({ email, password }: LoginRequest): Promise<LoginResponse> {
@@ -107,8 +108,15 @@ export class AuthService {
 
   async validateOtp(otp: string, jwt: string): Promise<void> {
     await this.client.post({
-      url: '/otp',
+      url: '/user/otp',
       data: { otp },
+      jwt,
+    })
+  }
+
+  async resendOtp(jwt: string): Promise<void> {
+    await this.client.post({
+      url: '/auth/otp',
       jwt,
     })
   }
