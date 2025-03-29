@@ -3,11 +3,16 @@ import { BranchService } from './branch'
 import { CategoryService } from './category'
 import { Client } from './client'
 import { CountryService } from './country'
+import { GenericProductService } from './generic-product'
+import { InventoryService } from './inventory'
 import { ManufacturerService } from './manufacturer'
 import { PresentationService } from './presentation'
 import { ProductService } from './product'
 import { StateService } from './state'
 import { UserService } from './user'
+import { PromoService } from './promo'
+import { CityService } from './city'
+import { UserAddressService } from './user-address'
 
 export class PharmaTech {
   private static instance: PharmaTech
@@ -17,10 +22,15 @@ export class PharmaTech {
   user: UserService
   country: CountryService
   state: StateService
+  city: CityService
   branch: BranchService
   category: CategoryService
   presentation: PresentationService
   manufacturer: ManufacturerService
+  genericProduct: GenericProductService
+  inventory: InventoryService
+  promo: PromoService
+  userAdress: UserAddressService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -32,10 +42,15 @@ export class PharmaTech {
     this.user = new UserService(this.client)
     this.country = new CountryService(this.client)
     this.state = new StateService(this.client)
+    this.city = new CityService(this.client)
     this.branch = new BranchService(this.client)
     this.category = new CategoryService(this.client)
     this.presentation = new PresentationService(this.client)
     this.manufacturer = new ManufacturerService(this.client)
+    this.genericProduct = new GenericProductService(this.client)
+    this.inventory = new InventoryService(this.client)
+    this.promo = new PromoService(this.client)
+    this.userAdress = new UserAddressService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -46,6 +61,6 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.3.1'
+    return '0.3.2'
   }
 }
