@@ -3,6 +3,7 @@ import { BranchService } from './branch'
 import { CategoryService } from './category'
 import { Client } from './client'
 import { CountryService } from './country'
+import { InventoryService } from './inventory'
 import { ManufacturerService } from './manufacturer'
 import { PresentationService } from './presentation'
 import { ProductService } from './product'
@@ -22,6 +23,7 @@ export class PharmaTech {
   category: CategoryService
   presentation: PresentationService
   manufacturer: ManufacturerService
+  inventory: InventoryService
   promo: PromoService
 
   /**
@@ -38,6 +40,7 @@ export class PharmaTech {
     this.category = new CategoryService(this.client)
     this.presentation = new PresentationService(this.client)
     this.manufacturer = new ManufacturerService(this.client)
+    this.inventory = new InventoryService(this.client)
     this.promo = new PromoService(this.client)
   }
 
