@@ -11,6 +11,7 @@ import { ProductService } from './product'
 import { StateService } from './state'
 import { UserService } from './user'
 import { PromoService } from './promo'
+import { UserAddressService } from './user-address'
 
 export class PharmaTech {
   private static instance: PharmaTech
@@ -27,6 +28,7 @@ export class PharmaTech {
   genericProduct: GenericProductService
   inventory: InventoryService
   promo: PromoService
+  userAdress: UserAddressService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -45,6 +47,7 @@ export class PharmaTech {
     this.genericProduct = new GenericProductService(this.client)
     this.inventory = new InventoryService(this.client)
     this.promo = new PromoService(this.client)
+    this.userAdress = new UserAddressService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
