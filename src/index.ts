@@ -11,6 +11,7 @@ import { ProductService } from './product'
 import { StateService } from './state'
 import { UserService } from './user'
 import { PromoService } from './promo'
+import { CityService } from './city'
 import { UserAddressService } from './user-address'
 
 export class PharmaTech {
@@ -21,6 +22,7 @@ export class PharmaTech {
   user: UserService
   country: CountryService
   state: StateService
+  city: CityService
   branch: BranchService
   category: CategoryService
   presentation: PresentationService
@@ -40,6 +42,7 @@ export class PharmaTech {
     this.user = new UserService(this.client)
     this.country = new CountryService(this.client)
     this.state = new StateService(this.client)
+    this.city = new CityService(this.client)
     this.branch = new BranchService(this.client)
     this.category = new CategoryService(this.client)
     this.presentation = new PresentationService(this.client)
@@ -58,6 +61,6 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.3.1'
+    return '0.3.2'
   }
 }
