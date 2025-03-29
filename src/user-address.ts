@@ -33,16 +33,22 @@ export class UserAddressService {
   async getAddress(
     userId: string,
     addressId: string,
+    jwt: string,
   ): Promise<UserAddressResponse> {
     const response = await this.client.get({
       url: `/user/${userId}/address/${addressId}`,
+      jwt,
     })
     return response as unknown as UserAddressResponse
   }
 
-  async getListAddresses(userId: string): Promise<UserAddressResponse[]> {
+  async getListAddresses(
+    userId: string,
+    jwt: string,
+  ): Promise<UserAddressResponse[]> {
     const response = await this.client.get({
       url: `/user/${userId}/address`,
+      jwt,
     })
     return response as unknown as UserAddressResponse[]
   }
@@ -50,17 +56,24 @@ export class UserAddressService {
   async createAddress(
     userId: string,
     createAddresData: createAddresData,
+    jwt: string,
   ): Promise<createAddresData> {
     const response = await this.client.post({
       url: `/user/${userId}/address`,
       data: createAddresData,
+      jwt,
     })
     return response as unknown as createAddresData
   }
 
-  async deleteAddress(userId: string, addressId: string): Promise<void> {
+  async deleteAddress(
+    userId: string,
+    addressId: string,
+    jwt: string,
+  ): Promise<void> {
     await this.client.delete({
       url: `/user/${userId}/address/${addressId}`,
+      jwt,
     })
   }
 
@@ -68,10 +81,12 @@ export class UserAddressService {
     userId: string,
     partialUserAddress: Partial<createAddresData>,
     addressId: string,
+    jwt: string,
   ): Promise<UserAddressResponse> {
     const response = await this.client.patch({
       url: `/user/${userId}/address/${addressId}`,
       data: partialUserAddress,
+      jwt,
     })
     return response as unknown as UserAddressResponse
   }
