@@ -4,11 +4,13 @@ import { CategoryService } from './category'
 import { Client } from './client'
 import { CountryService } from './country'
 import { GenericProductService } from './generic-product'
+import { InventoryService } from './inventory'
 import { ManufacturerService } from './manufacturer'
 import { PresentationService } from './presentation'
 import { ProductService } from './product'
 import { StateService } from './state'
 import { UserService } from './user'
+import { PromoService } from './promo'
 
 export class PharmaTech {
   private static instance: PharmaTech
@@ -23,6 +25,8 @@ export class PharmaTech {
   presentation: PresentationService
   manufacturer: ManufacturerService
   genericProduct: GenericProductService
+  inventory: InventoryService
+  promo: PromoService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -39,6 +43,8 @@ export class PharmaTech {
     this.presentation = new PresentationService(this.client)
     this.manufacturer = new ManufacturerService(this.client)
     this.genericProduct = new GenericProductService(this.client)
+    this.inventory = new InventoryService(this.client)
+    this.promo = new PromoService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
