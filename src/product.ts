@@ -32,6 +32,10 @@ export type ProductPresentation = BaseModel & {
   product: Product
 }
 
+export type ProductPaginationRequest = PaginationRequest & {
+  q?: string
+}
+
 export class ProductService {
   private client: Client
   constructor(client: Client) {
@@ -41,11 +45,12 @@ export class ProductService {
 
   async getProducts({
     page,
-    limit = 10,
-  }: PaginationRequest): Promise<Pagination<ProductPresentation>> {
+    limit,
+    q,
+  }: ProductPaginationRequest): Promise<Pagination<ProductPresentation>> {
     const response = await this.client.get({
       url: '/product',
-      params: { page, limit },
+      params: { page, limit, q },
     })
 
     return response as unknown as Pagination<ProductPresentation>
