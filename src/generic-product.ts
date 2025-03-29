@@ -1,3 +1,4 @@
+import type { CategoryResponse } from './category'
 import type { Client } from './client'
 import type { ManufacturerResponse } from './manufacturer'
 import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
@@ -17,6 +18,7 @@ export type UpdateGenericProduct = Partial<CreateGenericProduct>
 export type ResponseGenericProduct = GenericProduct &
   BaseModel & {
     manufacturer: ManufacturerResponse
+    categories: CategoryResponse[]
   }
 
 export class GenericProductService {
