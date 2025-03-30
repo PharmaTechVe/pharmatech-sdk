@@ -25,7 +25,7 @@ test('PharmaTech is running', async () => {
   const pharmaTech = new PharmaTech(true)
   expect(pharmaTech).toBeDefined()
   const version = pharmaTech.version()
-  expect(version).toBe('0.3.5')
+  expect(version).toBe('0.3.6')
 })
 
 test('AuthService login', async () => {
