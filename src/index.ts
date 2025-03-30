@@ -18,7 +18,7 @@ import { ProductImageService } from './product-image'
 
 export class PharmaTech {
   private static instance: PharmaTech
-  private client: Client
+  client: Client
   auth: AuthService
   product: ProductService
   user: UserService
@@ -67,6 +67,6 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.3.6'
+    return '0.3.7'
   }
 }
