@@ -1,6 +1,6 @@
 {
   "name": "@pharmatech/sdk",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "PharmaTech Core API SDK",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
