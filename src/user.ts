@@ -2,6 +2,13 @@ import type { UserGender } from './auth'
 import { Client } from './client'
 import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
 
+export enum UserRole {
+  ADMIN = 'admin',
+  BRANCH_ADMIN = 'branch_admin',
+  CUSTOMER = 'customer',
+  DELIVERY = 'delivery',
+}
+
 export type ProfileResponse = {
   firstName: string
   lastName: string
@@ -41,6 +48,17 @@ type UpdateUser = {
   gender?: UserGender
 }
 
+type CreateUser = {
+  firstName: string
+  lastName: string
+  email: string
+  documentId: string
+  phoneNumber: string
+  birthDate: string
+  gender: UserGender
+  role: UserRole
+}
+
 export class UserService {
   private client: Client
   constructor(client: Client) {
@@ -69,6 +87,15 @@ export class UserService {
       jwt,
     })
     return response as unknown as Pagination<UserList>
+  }
+
+  async create(user: CreateUser, jwt: string) {
+    const response = await this.client.post({
+      url: `/user`,
+      data: user,
+      jwt,
+    })
+    return response as unknown as UserList
   }
 
   async update(
