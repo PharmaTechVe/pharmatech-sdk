@@ -44,7 +44,7 @@ type UpdateUser = {
   lastName?: string
   phoneNumber?: string
   profilePicture?: string
-  birthDate?: Date
+  birthDate?: string
   gender?: UserGender
 }
 
