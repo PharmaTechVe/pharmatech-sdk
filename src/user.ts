@@ -46,6 +46,7 @@ type UpdateUser = {
   profilePicture?: string
   birthDate?: string
   gender?: UserGender
+  role?: UserRole
 }
 
 type CreateUser = {
