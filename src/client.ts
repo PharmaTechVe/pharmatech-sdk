@@ -1,14 +1,7 @@
 import axios, { type AxiosInstance } from 'axios'
 import { BASE_URL, DEV_URL } from './settings'
-import type { Pagination } from './utils/models'
-import {
-  BadRequestError,
-  ForbiddenError,
-  InternalServerError,
-  NotFoundError,
-  UnauthorizedError,
-  type APIError,
-} from './errors'
+import { APIError } from './errors'
+import type { Pagination } from './types'
 
 export type ClientConfig = {
   url: string
@@ -19,6 +12,7 @@ export type ClientConfig = {
 
 export class Client {
   private client: AxiosInstance
+  jwt?: string
 
   constructor(isDevMode: boolean, origin?: string) {
     let headers: Record<string, string> = {
@@ -34,10 +28,20 @@ export class Client {
   }
 
   async call(method: string, config: ClientConfig): Promise<Response> {
-    if (config.jwt) {
+    if (config.jwt || this.jwt) {
+      if (config.jwt) {
+        this.jwt = config.jwt
+      }
       this.client.interceptors.request.use((axiosConfig) => {
         if (axiosConfig.headers) {
-          axiosConfig.headers['Authorization'] = `Bearer ${config.jwt}`
+          axiosConfig.headers['Authorization'] = `Bearer ${this.jwt}`
+        }
+        return axiosConfig
+      })
+    } else {
+      this.client.interceptors.request.use((axiosConfig) => {
+        if (axiosConfig.headers) {
+          delete axiosConfig.headers['Authorization']
         }
         return axiosConfig
       })
@@ -53,21 +57,13 @@ export class Client {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        const axiosError = error as APIError
-        switch (axiosError.status) {
-          case 400:
-            throw new BadRequestError(axiosError.response?.data.message)
-          case 401:
-            throw new UnauthorizedError()
-          case 403:
-            throw new ForbiddenError()
-          case 404:
-            throw new NotFoundError(axiosError.response?.data.message[0])
-          default:
-            throw new InternalServerError(axiosError.response?.data.message[0])
+        let message = error.response?.data?.message
+        if (typeof message === 'string') {
+          message = [message]
         }
+        throw new APIError(message, error.response?.status ?? 500)
       }
-      throw new Error('Something went wrong with the request')
+      throw new Error(error as string)
     }
   }
 
@@ -109,5 +105,13 @@ export class Client {
   async delete(config: ClientConfig) {
     const data = await this.call('delete', config)
     return data
+  }
+
+  setJWT(jwt: string) {
+    this.jwt = jwt
+  }
+
+  removeJWT() {
+    this.jwt = undefined
   }
 }
