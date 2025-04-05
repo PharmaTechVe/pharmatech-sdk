@@ -1,24 +1,5 @@
-import { Client } from './client'
-
-export type UserAddressResponse = {
-  adress: string
-  zipCode: string
-  latitude: number | null
-  longitude: number | null
-  cityId: string
-  id: string
-  nameCity: string
-  nameState: string
-  nameCountry: string
-}
-
-export type createAddresData = {
-  adress: string
-  zipCode: string
-  latitude: number | null
-  longitude: number | null
-  cityId: string
-}
+import { Client } from '../client'
+import type { CreateUserAddressRequest, UserAddressResponse } from '../types'
 
 export class UserAddressService {
   private client: Client
@@ -55,15 +36,15 @@ export class UserAddressService {
 
   async createAddress(
     userId: string,
-    createAddresData: createAddresData,
+    createAddresData: CreateUserAddressRequest,
     jwt: string,
-  ): Promise<createAddresData> {
+  ): Promise<CreateUserAddressRequest> {
     const response = await this.client.post({
       url: `/user/${userId}/address`,
       data: createAddresData,
       jwt,
     })
-    return response as unknown as createAddresData
+    return response as unknown as CreateUserAddressRequest
   }
 
   async deleteAddress(
@@ -79,7 +60,7 @@ export class UserAddressService {
 
   async update(
     userId: string,
-    partialUserAddress: Partial<createAddresData>,
+    partialUserAddress: Partial<CreateUserAddressRequest>,
     addressId: string,
     jwt: string,
   ): Promise<UserAddressResponse> {

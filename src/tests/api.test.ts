@@ -1,4 +1,3 @@
-import { UserGender } from '../auth'
 import { PharmaTech } from '../index'
 import { test, expect, vi } from 'vitest'
 
@@ -25,7 +24,7 @@ test('PharmaTech is running', async () => {
   const pharmaTech = new PharmaTech(true)
   expect(pharmaTech).toBeDefined()
   const version = pharmaTech.version()
-  expect(version).toBe('0.3.9')
+  expect(version).toBe('0.4.0')
 })
 
 test('AuthService login', async () => {
@@ -110,13 +109,17 @@ test('UserService getProfile', async () => {
 
   const profile = await pharmaTech.user.getProfile(
     '3efe4c87-6029-431b-8250-b3c695ec9397',
+    'mockAccessToken',
   )
   expect(profile).toEqual(ProfileResponse)
 })
 
 test('UserService findAll', async () => {
   const pharmaTech = new PharmaTech(true)
-  const users = await pharmaTech.user.findAll({ page: 1, limit: 10 })
+  const users = await pharmaTech.user.findAll(
+    { page: 1, limit: 10 },
+    'mockAccessToken',
+  )
 
   expect(users).toBeDefined()
 })

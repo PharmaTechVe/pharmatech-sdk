@@ -1,9 +1,5 @@
-import type { Client } from './client'
-import type { BaseModel } from './utils/models'
-
-export type ProductImage = BaseModel & {
-  url: string
-}
+import type { Client } from '../client'
+import type { ProductImage } from '../types'
 
 export class ProductImageService {
   private client: Client
