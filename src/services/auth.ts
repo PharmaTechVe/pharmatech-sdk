@@ -17,6 +17,8 @@ export class AuthService {
     this.updatePassword = this.updatePassword.bind(this)
     this.validateOtp = this.validateOtp.bind(this)
     this.resendOtp = this.resendOtp.bind(this)
+    this.logout = this.logout.bind(this)
+    this.saveJWT = this.saveJWT.bind(this)
   }
 
   async login({ email, password }: LoginRequest): Promise<LoginResponse> {
@@ -28,6 +30,14 @@ export class AuthService {
       },
     })
     return response as unknown as LoginResponse
+  }
+
+  logout(): void {
+    this.client.removeJWT()
+  }
+
+  saveJWT(jwt: string): void {
+    this.client.setJWT(jwt)
   }
 
   async signUp(signUpData: SignUpRequest): Promise<SignUpResponse> {

@@ -28,20 +28,10 @@ export class Client {
   }
 
   async call(method: string, config: ClientConfig): Promise<Response> {
-    if (config.jwt || this.jwt) {
-      if (config.jwt) {
-        this.jwt = config.jwt
-      }
+    if (config.jwt) {
       this.client.interceptors.request.use((axiosConfig) => {
         if (axiosConfig.headers) {
-          axiosConfig.headers['Authorization'] = `Bearer ${this.jwt}`
-        }
-        return axiosConfig
-      })
-    } else {
-      this.client.interceptors.request.use((axiosConfig) => {
-        if (axiosConfig.headers) {
-          delete axiosConfig.headers['Authorization']
+          axiosConfig.headers['Authorization'] = `Bearer ${config.jwt}`
         }
         return axiosConfig
       })

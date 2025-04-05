@@ -1,20 +1,22 @@
-import { AuthService } from './auth'
-import { BranchService } from './branch'
-import { CategoryService } from './category'
 import { Client } from './client'
-import { CountryService } from './country'
-import { GenericProductService } from './generic-product'
-import { InventoryService } from './inventory'
-import { ManufacturerService } from './manufacturer'
-import { PresentationService } from './presentation'
-import { ProductService } from './product'
-import { StateService } from './state'
-import { UserService } from './user'
-import { PromoService } from './promo'
-import { CityService } from './city'
-import { UserAddressService } from './user-address'
-import { ProductPresentationService } from './product-presentation'
-import { ProductImageService } from './product-image'
+import {
+  AuthService,
+  BranchService,
+  CategoryService,
+  CityService,
+  CountryService,
+  GenericProductService,
+  InventoryService,
+  ManufacturerService,
+  PresentationService,
+  ProductImageService,
+  ProductPresentationService,
+  ProductService,
+  PromoService,
+  StateService,
+  UserAddressService,
+  UserService,
+} from './services'
 
 export class PharmaTech {
   private static instance: PharmaTech
@@ -67,6 +69,9 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.3.9'
+    return '0.4.0'
   }
 }
+
+export * from './types'
+export * from './errors'
