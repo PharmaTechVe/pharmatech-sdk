@@ -1,6 +1,6 @@
 {
   "name": "@pharmatech/sdk",
-  "version": "0.3.10",
+  "version": "0.4.0",
   "description": "PharmaTech Core API SDK",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -19,7 +19,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./types": {
+      "import": "./dist/index.d.ts",
+      "require": "./dist/index.d.ts"
+    }
   },
   "files": [
     "dist"

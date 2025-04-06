@@ -1,21 +1,10 @@
-import { Client } from './client'
-import type { StateResponse } from './state'
-import type { Pagination, PaginationRequest } from './utils/models'
-
-export type City = {
-  name: string
-  stateId: string
-}
-
-export type CityResponse = {
-  id: string
-  name: string
-  state: StateResponse
-}
-
-type CityPaginationRequest = PaginationRequest & {
-  stateId?: string
-}
+import { Client } from '../client'
+import type {
+  City,
+  CityPaginationRequest,
+  CityResponse,
+  Pagination,
+} from '../types'
 
 export class CityService {
   private client: Client

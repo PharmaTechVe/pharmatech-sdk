@@ -1,14 +1,10 @@
-import type { Client } from './client'
-import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
-
-export type Presentation = {
-  name: string
-  description: string
-  quantity: number
-  measurementUnit: string
-}
-
-export type PresentationResponse = Presentation & BaseModel
+import type { Client } from '../client'
+import type {
+  Pagination,
+  PaginationRequest,
+  Presentation,
+  PresentationResponse,
+} from '../types'
 
 export class PresentationService {
   private client: Client

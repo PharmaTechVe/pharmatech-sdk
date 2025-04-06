@@ -1,25 +1,10 @@
-import type { BranchResponse } from './branch'
-import { Client } from './client'
-import type { ProductPresentation } from './product'
-import type { StateResponse } from './state'
-import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
-
-export type Inventory = {
-  stockQuantity: number
-  branchId: string
-  productPresentationId: string
-}
-
-export type InventoryResponse = BaseModel & {
-  stockQuantity: number
-  branch: BranchResponse
-  productPresentation: ProductPresentation
-}
-
-export type InventoryPaginationRequest = PaginationRequest & {
-  branchId?: string
-  productPresentationId?: string
-}
+import { Client } from '../client'
+import type {
+  Inventory,
+  InventoryPaginationRequest,
+  InventoryResponse,
+  Pagination,
+} from '../types'
 
 export class InventoryService {
   private client: Client

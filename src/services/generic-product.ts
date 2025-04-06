@@ -1,25 +1,11 @@
-import type { CategoryResponse } from './category'
-import type { Client } from './client'
-import type { ManufacturerResponse } from './manufacturer'
-import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
-
-export type GenericProduct = {
-  name: string
-  genericName: string
-  priority: number
-  description?: string
-}
-
-export type CreateGenericProduct = GenericProduct & {
-  manufacturerId: string
-}
-
-export type UpdateGenericProduct = Partial<CreateGenericProduct>
-export type ResponseGenericProduct = GenericProduct &
-  BaseModel & {
-    manufacturer: ManufacturerResponse
-    categories: CategoryResponse[]
-  }
+import type { Client } from '../client'
+import type {
+  CreateGenericProduct,
+  Pagination,
+  PaginationRequest,
+  GenericProductResponse,
+  UpdateGenericProduct,
+} from '../types'
 
 export class GenericProductService {
   private client: Client
@@ -33,47 +19,47 @@ export class GenericProductService {
     this.delete = this.delete.bind(this)
   }
 
-  async getById(id: string): Promise<ResponseGenericProduct> {
+  async getById(id: string): Promise<GenericProductResponse> {
     const response = await this.client.get({
       url: `/product/generic/${id}`,
     })
-    return response as unknown as ResponseGenericProduct
+    return response as unknown as GenericProductResponse
   }
 
   async findAll({
     page = 1,
     limit = 10,
-  }: PaginationRequest): Promise<Pagination<ResponseGenericProduct>> {
+  }: PaginationRequest): Promise<Pagination<GenericProductResponse>> {
     const response = await this.client.get({
       url: '/product/generic',
       params: { page, limit },
     })
-    return response as Pagination<ResponseGenericProduct>
+    return response as Pagination<GenericProductResponse>
   }
 
   async create(
     genericProduct: CreateGenericProduct,
     jwt: string,
-  ): Promise<ResponseGenericProduct> {
+  ): Promise<GenericProductResponse> {
     const response = await this.client.post({
       url: '/product/generic',
       data: genericProduct,
       jwt,
     })
-    return response as unknown as ResponseGenericProduct
+    return response as unknown as GenericProductResponse
   }
 
   async update(
     id: string,
     partialGenericProduct: UpdateGenericProduct,
     jwt: string,
-  ): Promise<ResponseGenericProduct> {
+  ): Promise<GenericProductResponse> {
     const response = await this.client.patch({
       url: `/product/generic/${id}`,
       data: partialGenericProduct,
       jwt,
     })
-    return response as unknown as ResponseGenericProduct
+    return response as unknown as GenericProductResponse
   }
 
   async delete(id: string, jwt: string): Promise<void> {
