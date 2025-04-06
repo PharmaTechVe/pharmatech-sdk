@@ -1,9 +1,9 @@
 import type { BaseModel } from './utils'
 
 export type Promo = {
-  productPresentationId: string
   name: string
   discount: number
+  startAt: Date
   expiredAt: Date
 }
 
