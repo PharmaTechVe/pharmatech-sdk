@@ -7,6 +7,8 @@ export type UserAddressResponse = {
   longitude: number | null
   cityId: string
   id: string
+  additionalInformation: string | null
+  referencePoint: string | null
   nameCity: string
   nameState: string
   nameCountry: string
@@ -18,6 +20,8 @@ export type createAddresData = {
   latitude: number | null
   longitude: number | null
   cityId: string
+  additionalInformation: string | null
+  referencePoint: string | null
 }
 
 export class UserAddressService {
