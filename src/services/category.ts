@@ -1,12 +1,10 @@
-import type { Client } from './client'
-import type { Pagination, PaginationRequest, UUIDModel } from './utils/models'
-
-export type Category = {
-  name: string
-  description: string
-}
-
-export type CategoryResponse = Category & UUIDModel
+import type { Client } from '../client'
+import type {
+  Category,
+  CategoryResponse,
+  Pagination,
+  PaginationRequest,
+} from '../types'
 
 export class CategoryService {
   private client: Client

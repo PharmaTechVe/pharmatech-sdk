@@ -1,14 +1,10 @@
-import type { Client } from './client'
-import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
-
-export type Promo = {
-  productPresentationId: string
-  name: string
-  discount: number
-  expiredAt: Date
-}
-
-export type PromoResponse = Promo & BaseModel
+import type { Client } from '../client'
+import type {
+  Pagination,
+  PaginationRequest,
+  Promo,
+  PromoResponse,
+} from '../types'
 
 export class PromoService {
   private client: Client

@@ -1,18 +1,11 @@
-import type { Client } from './client'
-import type { CountryResponse } from './country'
-import type { BaseModel, Pagination, PaginationRequest } from './utils/models'
-
-export type Manufacturer = {
-  name: string
-  description: string
-}
-
-export type CreateManufacturerRequest = Manufacturer & {
-  countryId: string
-}
-
-export type ManufacturerResponse = Manufacturer &
-  BaseModel & { country: CountryResponse }
+import type { Client } from '../client'
+import type {
+  CreateManufacturerRequest,
+  Manufacturer,
+  ManufacturerResponse,
+  Pagination,
+  PaginationRequest,
+} from '../types'
 
 export class ManufacturerService {
   private client: Client
