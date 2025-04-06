@@ -50,6 +50,7 @@ export class AuthService {
     this.updatePassword = this.updatePassword.bind(this)
     this.validateOtp = this.validateOtp.bind(this)
     this.resendOtp = this.resendOtp.bind(this)
+    this.updateCurrentPassword = this.updateCurrentPassword.bind(this)
   }
 
   async login({ email, password }: LoginRequest): Promise<LoginResponse> {
@@ -101,6 +102,21 @@ export class AuthService {
       url: '/auth/password',
       data: {
         password,
+      },
+      jwt,
+    })
+  }
+
+  async updateCurrentPassword(
+    currentPassword: string,
+    newPassword: string,
+    jwt: string,
+  ): Promise<void> {
+    await this.client.patch({
+      url: '/auth/current-password',
+      data: {
+        currentPassword,
+        password: newPassword,
       },
       jwt,
     })
