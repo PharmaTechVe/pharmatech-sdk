@@ -1,6 +1,6 @@
 # PharmaTech API's SDK
 
-The PharmaTech SDK provides a set of services to interact with the PharmaTech API. It includes support for authentication, managing entities like countries, states, cities, branches, categories, manufacturers, and more.
+The PharmaTech SDK provides a set of services to interact with the PharmaTech API. It includes support for authentication, managing entities like countries, states, cities, branches, categories, manufacturers, generic products, presentations, and more.
 
 ---
 
@@ -9,7 +9,7 @@ The PharmaTech SDK provides a set of services to interact with the PharmaTech AP
 ### Installation
 
 ```sh
-   npm install @pharmatech/sdk
+npm install @pharmatech/sdk
 ```
 
 ### `PharmaTech` Class
@@ -26,78 +26,209 @@ import { PharmaTech } from '@pharmatech/sdk'
 const pharmaTech = PharmaTech.getInstance(true) // Pass `true` for development mode
 ```
 
-#### Services
+---
+
+## Services
 
 The `PharmaTech` class provides the following services:
 
-1. **`auth` (AuthService)**:
+---
 
-   - Methods:
-     - `login(email: string, password: string): Promise<LoginResponse>`
-     - `signUp(signUpData: SignUpRequest): Promise<SignUpResponse>`
-     - `updatePassword(currentPassword: string, newPassword: string): Promise<void>`
+### 1. **`auth` (AuthService)**
 
-2. **`country` (CountryService)**:
+Handles user authentication.
 
-   - Methods:
-     - `getById(id: string): Promise<CountryResponse>`
-     - `findAll(page: number, limit: number): Promise<Pagination<CountryResponse>>`
-     - `create(country: Country): Promise<CountryResponse>`
-     - `update(id: string, partialCountry: Partial<Country>): Promise<CountryResponse>`
-     - `delete(id: string): Promise<void>`
+#### Methods:
 
-3. **`state` (StateService)**:
+- **`login(email: string, password: string): Promise<LoginResponse>`**
 
-   - Methods:
-     - `getById(id: string): Promise<StateResponse>`
-     - `findAll(page: number, limit: number, countryId?: string): Promise<Pagination<StateResponse>>`
-     - `create(state: State): Promise<StateResponse>`
-     - `update(id: string, partialState: Partial<State>): Promise<StateResponse>`
-     - `delete(id: string): Promise<void>`
+  - Logs in a user and returns an access token.
+  - **Example**:
+    ```typescript
+    const loginResponse = await pharmaTech.auth.login(
+      'user@example.com',
+      'password123',
+    )
+    console.log(loginResponse.accessToken)
+    ```
+  - **Parameters**:
+    - `email`: User's email.
+    - `password`: User's password.
+  - **Returns**: `Promise<LoginResponse>` containing the access token.
 
-4. **`city` (CityService)**:
+- **`signUp(signUpData: SignUpRequest): Promise<SignUpResponse>`**
 
-   - Methods:
-     - `getById(id: string): Promise<CityResponse>`
-     - `findAll(page: number, limit: number, stateId?: string): Promise<Pagination<CityResponse>>`
-     - `create(city: City): Promise<CityResponse>`
-     - `update(id: string, partialCity: Partial<City>): Promise<CityResponse>`
-     - `delete(id: string): Promise<void>`
+  - Registers a new user.
+  - **Example**:
+    ```typescript
+    const signUpResponse = await pharmaTech.auth.signUp({
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com',
+      password: 'securePassword123',
+      documentId: '123456789',
+      birthDate: '1990-01-01',
+    })
+    console.log(signUpResponse.id)
+    ```
+  - **Parameters**:
+    - `signUpData`: Object containing user details.
+  - **Returns**: `Promise<SignUpResponse>` containing the created user details.
 
-5. **`branch` (BranchService)**:
+- **`updateCurrentPassword(currentPassword: string, newPassword: string, jwt: string): Promise<void>`**
+  - Updates the user's password.
+  - **Example**:
+    ```typescript
+    await pharmaTech.auth.updateCurrentPassword(
+      'oldPassword123',
+      'newPassword456',
+      'jwt',
+    )
+    console.log('Password updated successfully')
+    ```
+  - **Parameters**:
+    - `currentPassword`: Current password.
+    - `newPassword`: New password.
+  - **Returns**: `Promise<void>`.
 
-   - Methods:
-     - `getById(id: string): Promise<BranchResponse>`
-     - `findAll(page: number, limit: number): Promise<Pagination<BranchResponse>>`
-     - `create(branch: CreateBranchRequest): Promise<BranchResponse>`
-     - `update(id: string, partialBranch: Partial<Branch>): Promise<BranchResponse>`
-     - `delete(id: string): Promise<void>`
+---
 
-6. **`category` (CategoryService)**:
+### 2. **`country` (CountryService)**
 
-   - Methods:
-     - `getById(id: string): Promise<CategoryResponse>`
-     - `findAll(page: number, limit: number): Promise<Pagination<CategoryResponse>>`
-     - `create(category: Category): Promise<CategoryResponse>`
-     - `update(id: string, partialCategory: Partial<Category>): Promise<CategoryResponse>`
-     - `delete(id: string): Promise<void>`
+Manages countries.
 
-7. **`manufacturer` (ManufacturerService)**:
+#### Methods:
 
-   - Methods:
-     - `getById(id: string): Promise<ManufacturerResponse>`
-     - `findAll(page: number, limit: number): Promise<Pagination<ManufacturerResponse>>`
-     - `create(manufacturer: CreateManufacturerRequest): Promise<ManufacturerResponse>`
-     - `update(id: string, partialManufacturer: Partial<Manufacturer>): Promise<ManufacturerResponse>`
-     - `delete(id: string): Promise<void>`
+- **`getById(id: string): Promise<CountryResponse>`**
 
-8. **`product` (ProductService)**:
-   - Methods:
-     - `getById(id: string): Promise<ProductResponse>`
-     - `findAll(page: number, limit: number): Promise<Pagination<ProductResponse>>`
-     - `create(product: Product): Promise<ProductResponse>`
-     - `update(id: string, partialProduct: Partial<Product>): Promise<ProductResponse>`
-     - `delete(id: string): Promise<void>`
+  - Fetches a country by its ID.
+  - **Example**:
+    ```typescript
+    const country = await pharmaTech.country.getById('country-id')
+    console.log(country.name)
+    ```
+  - **Parameters**:
+    - `id`: Country ID.
+  - **Returns**: `Promise<CountryResponse>` containing country details.
+
+- **`findAll(page: number, limit: number): Promise<Pagination<CountryResponse>>`**
+
+  - Retrieves a paginated list of countries.
+  - **Example**:
+    ```typescript
+    const countries = await pharmaTech.country.findAll(1, 10)
+    console.log(countries.results)
+    ```
+  - **Parameters**:
+    - `page`: Page number.
+    - `limit`: Number of items per page.
+  - **Returns**: `Promise<Pagination<CountryResponse>>`.
+
+- **`create(country: Country): Promise<CountryResponse>`**
+
+  - Creates a new country.
+  - **Example**:
+    ```typescript
+    const newCountry = await pharmaTech.country.create({
+      name: 'New Country',
+      code: 'NC',
+    })
+    console.log(newCountry.id)
+    ```
+  - **Parameters**:
+    - `country`: Object containing country details.
+  - **Returns**: `Promise<CountryResponse>`.
+
+- **`update(id: string, partialCountry: Partial<Country>): Promise<CountryResponse>`**
+
+  - Updates a country partially by its ID.
+  - **Example**:
+    ```typescript
+    const updatedCountry = await pharmaTech.country.update('country-id', {
+      name: 'Updated Country',
+    })
+    console.log(updatedCountry.name)
+    ```
+  - **Parameters**:
+    - `id`: Country ID.
+    - `partialCountry`: Partial object containing updated fields.
+  - **Returns**: `Promise<CountryResponse>`.
+
+- **`delete(id: string): Promise<void>`**
+  - Deletes a country by its ID.
+  - **Example**:
+    ```typescript
+    await pharmaTech.country.delete('country-id')
+    console.log('Country deleted')
+    ```
+  - **Parameters**:
+    - `id`: Country ID.
+  - **Returns**: `Promise<void>`.
+
+---
+
+### 3. **`state` (StateService)**
+
+Manages states.
+
+#### Methods:
+
+- **`getById(id: string): Promise<StateResponse>`**
+
+  - Fetches a state by its ID.
+  - **Example**:
+    ```typescript
+    const state = await pharmaTech.state.getById('state-id')
+    console.log(state.name)
+    ```
+  - **Parameters**:
+    - `id`: State ID.
+  - **Returns**: `Promise<StateResponse>`.
+
+- **`findAll(page: number, limit: number, countryId?: string): Promise<Pagination<StateResponse>>`**
+  - Retrieves a paginated list of states, optionally filtered by country ID.
+  - **Example**:
+    ```typescript
+    const states = await pharmaTech.state.findAll(1, 10, 'country-id')
+    console.log(states.results)
+    ```
+  - **Parameters**:
+    - `page`: Page number.
+    - `limit`: Number of items per page.
+    - `countryId`: (Optional) Country ID to filter states.
+  - **Returns**: `Promise<Pagination<StateResponse>>`.
+
+---
+
+### 4. **`genericProduct` (GenericProductService)**
+
+Manages generic products.
+
+#### Methods:
+
+- **`getById(id: string): Promise<ResponseGenericProduct>`**
+
+  - Fetches a generic product by its ID.
+  - **Example**:
+    ```typescript
+    const product = await pharmaTech.genericProduct.getById('product-id')
+    console.log(product.name)
+    ```
+  - **Parameters**:
+    - `id`: Generic product ID.
+  - **Returns**: `Promise<ResponseGenericProduct>`.
+
+- **`findAll(page: number, limit: number): Promise<Pagination<ResponseGenericProduct>>`**
+  - Retrieves a paginated list of generic products.
+  - **Example**:
+    ```typescript
+    const products = await pharmaTech.genericProduct.findAll(1, 10)
+    console.log(products.results)
+    ```
+  - **Parameters**:
+    - `page`: Page number.
+    - `limit`: Number of items per page.
+  - **Returns**: `Promise<Pagination<ResponseGenericProduct>>`.
 
 ---
 
@@ -117,59 +248,3 @@ try {
 ```
 
 ---
-
-### Contribute
-
-Make sure you have the following installed on your machine:
-
-- Node.js (version 20 or higher)
-- npm (Node Package Manager)
-
-### Installation
-
-1. Clone the repository:
-
-   ```sh
-   git clone https://github.com/PharmaTechVe/pharmatech-sdk.git
-   cd pharmatech-sdk
-   ```
-
-2. Install the dependencies:
-
-   ```sh
-   npm install
-   ```
-
-3. Running the project
-
-- To build the project, run:
-
-  ```sh
-  npm run build
-  ```
-
-  This will compile the TypeScript files and generate the output in the dist directory.
-
-- To prepare husky, run:
-
-  ```sh
-  npm run prepare
-  ```
-
-  This will prepare huksy as git hooks for commits and push
-
-- To format the project, run:
-
-  ```sh
-  npm run format
-  ```
-
-- To test the project, run:
-
-  ```sh
-  npm run test
-  ```
-
-### Continuous Integration
-
-The project uses GitHub Actions for continuous integration. The workflows are defined in the workflows directory.
