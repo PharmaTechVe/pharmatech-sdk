@@ -28,10 +28,11 @@ export class CategoryService {
   async findAll({
     page = 1,
     limit = 10,
+    q,
   }: PaginationRequest): Promise<Pagination<CategoryResponse>> {
     const response = await this.client.get({
       url: '/category',
-      params: { page, limit },
+      params: { page, limit, q },
     })
     return response as Pagination<CategoryResponse>
   }

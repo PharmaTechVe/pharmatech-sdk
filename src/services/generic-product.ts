@@ -2,9 +2,9 @@ import type { Client } from '../client'
 import type {
   CreateGenericProduct,
   Pagination,
-  PaginationRequest,
   GenericProductResponse,
   UpdateGenericProduct,
+  PaginationProductRequest,
 } from '../types'
 
 export class GenericProductService {
@@ -29,10 +29,12 @@ export class GenericProductService {
   async findAll({
     page = 1,
     limit = 10,
-  }: PaginationRequest): Promise<Pagination<GenericProductResponse>> {
+    q,
+    categoryId,
+  }: PaginationProductRequest): Promise<Pagination<GenericProductResponse>> {
     const response = await this.client.get({
       url: '/product/generic',
-      params: { page, limit },
+      params: { page, limit, q, categoryId },
     })
     return response as Pagination<GenericProductResponse>
   }

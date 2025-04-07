@@ -16,6 +16,7 @@ import {
   StateService,
   UserAddressService,
   UserService,
+  CouponService,
 } from './services'
 
 export class PharmaTech {
@@ -37,6 +38,7 @@ export class PharmaTech {
   userAdress: UserAddressService
   productPresentation: ProductPresentationService
   productImage: ProductImageService
+  coupon: CouponService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -59,6 +61,7 @@ export class PharmaTech {
     this.userAdress = new UserAddressService(this.client)
     this.productPresentation = new ProductPresentationService(this.client)
     this.productImage = new ProductImageService(this.client)
+    this.coupon = new CouponService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -69,7 +72,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.0'
+    return '0.4.1'
   }
 }
 

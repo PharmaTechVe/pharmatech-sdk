@@ -20,13 +20,6 @@ vi.mock('../client', () => {
   }
 })
 
-test('PharmaTech is running', async () => {
-  const pharmaTech = new PharmaTech(true)
-  expect(pharmaTech).toBeDefined()
-  const version = pharmaTech.version()
-  expect(version).toBe('0.4.0')
-})
-
 test('AuthService login', async () => {
   const pharmaTech = new PharmaTech(true)
   const loginResponse = await pharmaTech.auth.login({

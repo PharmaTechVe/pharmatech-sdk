@@ -1,7 +1,9 @@
 export type PaginationRequest = {
   page?: number
   limit?: number
+  q?: string
 }
+
 export type Pagination<T> = {
   results: T[]
   count: number
