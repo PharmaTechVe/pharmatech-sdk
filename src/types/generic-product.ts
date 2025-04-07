@@ -1,6 +1,6 @@
 import type { CategoryResponse } from './category'
 import type { ManufacturerResponse } from './manufacturer'
-import type { BaseModel } from './utils'
+import type { BaseModel, PaginationRequest } from './utils'
 
 export type GenericProduct = {
   name: string
@@ -20,3 +20,7 @@ export type GenericProductResponse = GenericProduct &
     manufacturer: ManufacturerResponse
     categories: CategoryResponse[]
   }
+
+export type PaginationProductRequest = PaginationRequest & {
+  categoryId?: string
+}

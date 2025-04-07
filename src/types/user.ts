@@ -1,5 +1,5 @@
 import type { UserGender } from './auth'
-import type { BaseModel } from './utils'
+import type { BaseModel, PaginationRequest } from './utils'
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -57,4 +57,8 @@ export type CreateUser = {
   birthDate: string
   gender: UserGender
   role: UserRole
+}
+
+export type PaginationUserRequest = PaginationRequest & {
+  role?: UserRole
 }
