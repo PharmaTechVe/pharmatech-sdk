@@ -2,7 +2,7 @@ import type { ProductImage } from './product-image'
 import type { Manufacturer } from './manufacturer'
 import type { BaseModel, PaginationRequest } from './utils'
 import type { Category } from './category'
-import type { Presentation } from './presentation'
+import type { PresentationResponse } from './presentation'
 
 export type Product = BaseModel & {
   name: string
@@ -16,7 +16,7 @@ export type Product = BaseModel & {
 
 export type ProductPresentation = BaseModel & {
   price: number
-  presentation: Presentation
+  presentation: PresentationResponse
   product: Product
 }
 
