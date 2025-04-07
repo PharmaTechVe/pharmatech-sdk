@@ -4,7 +4,7 @@ import type {
   BranchResponse,
   CreateBranchRequest,
   Pagination,
-  PaginationRequest,
+  PaginationBranchRequest,
 } from '../types'
 
 export class BranchService {
@@ -28,12 +28,12 @@ export class BranchService {
   }
 
   async findAll(
-    { page = 1, limit = 10 }: PaginationRequest,
+    { page = 1, limit = 10, q, stateId }: PaginationBranchRequest,
     jwt: string,
   ): Promise<Pagination<BranchResponse>> {
     const response = await this.client.get({
       url: '/branch',
-      params: { page, limit },
+      params: { page, limit, q, stateId },
       jwt,
     })
     return response as Pagination<BranchResponse>
