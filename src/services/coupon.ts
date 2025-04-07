@@ -11,14 +11,14 @@ export class CouponService {
 
   constructor(client: Client) {
     this.client = client
-    this.getById = this.getById.bind(this)
+    this.getByCode = this.getByCode.bind(this)
     this.findAll = this.findAll.bind(this)
     this.create = this.create.bind(this)
     this.update = this.update.bind(this)
     this.delete = this.delete.bind(this)
   }
 
-  async getById(code: string, jwt: string): Promise<CouponResponse> {
+  async getByCode(code: string, jwt: string): Promise<CouponResponse> {
     const response = await this.client.get({
       url: `/coupon/${code}`,
       jwt,
