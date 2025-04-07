@@ -2,7 +2,7 @@ import { Client } from '../client'
 import type {
   CreateUser,
   Pagination,
-  PaginationRequest,
+  PaginationUserRequest,
   UpdateUser,
   UserList,
 } from '../types'
@@ -26,12 +26,12 @@ export class UserService {
   }
 
   async findAll(
-    { page, limit = 10 }: PaginationRequest,
+    { page, limit = 10, q, role }: PaginationUserRequest,
     jwt: string,
   ): Promise<Pagination<UserList>> {
     const response = await this.client.get({
       url: '/user',
-      params: { page, limit },
+      params: { page, limit, q, role },
       jwt,
     })
     return response as unknown as Pagination<UserList>
