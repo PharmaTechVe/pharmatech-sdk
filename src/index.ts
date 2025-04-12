@@ -17,6 +17,7 @@ import {
   UserAddressService,
   UserService,
   CouponService,
+  PaymentInformationService,
 } from './services'
 
 export class PharmaTech {
@@ -39,6 +40,7 @@ export class PharmaTech {
   productPresentation: ProductPresentationService
   productImage: ProductImageService
   coupon: CouponService
+  PaymentInformation: PaymentInformationService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -62,6 +64,7 @@ export class PharmaTech {
     this.productPresentation = new ProductPresentationService(this.client)
     this.productImage = new ProductImageService(this.client)
     this.coupon = new CouponService(this.client)
+    this.PaymentInformation = new PaymentInformationService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
