@@ -1,10 +1,11 @@
-import type { Client } from '@/client'
-import type { Pagination, PaginationRequest } from '@/types'
+import type { Client } from '../client'
 import type {
+  Pagination,
+  PaginationRequest,
   PaymentInfoResponse,
   PaymentInformation,
   PaymentMethod,
-} from '@/types/payment-information'
+} from '../types'
 
 export class PaymentInformationService {
   private client: Client
