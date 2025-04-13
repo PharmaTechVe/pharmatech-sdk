@@ -1,3 +1,4 @@
+import type { ProductImage } from './product-image'
 import type { CategoryResponse } from './category'
 import type { ManufacturerResponse } from './manufacturer'
 import type { BaseModel, PaginationRequest } from './utils'
@@ -24,3 +25,8 @@ export type GenericProductResponse = GenericProduct &
 export type PaginationProductRequest = PaginationRequest & {
   categoryId?: string
 }
+
+export type OrderGenericProductResponse = GenericProduct &
+  BaseModel & {
+    images: ProductImage[]
+  }
