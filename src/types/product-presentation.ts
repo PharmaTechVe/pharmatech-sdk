@@ -1,6 +1,10 @@
 import type { PresentationResponse } from './presentation'
-import type { GenericProductResponse } from './generic-product'
+import type {
+  GenericProductResponse,
+  OrderGenericProductResponse,
+} from './generic-product'
 import type { BaseModel } from './utils'
+import type { PromoResponse } from './promo'
 
 export type ProductPresentationResponse = BaseModel & {
   price: number
@@ -10,3 +14,9 @@ export type ProductPresentationResponse = BaseModel & {
 export type ProductPresentationDetailResponse = ProductPresentationResponse & {
   product: GenericProductResponse
 }
+
+export type OrderDetailProductPresentationResponse =
+  ProductPresentationResponse & {
+    product: OrderGenericProductResponse
+    promo: PromoResponse
+  }
