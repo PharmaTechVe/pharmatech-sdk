@@ -17,6 +17,8 @@ import {
   UserAddressService,
   UserService,
   CouponService,
+  PaymentInformationService,
+  PaymentConfirmationService,
 } from './services'
 
 export class PharmaTech {
@@ -39,6 +41,8 @@ export class PharmaTech {
   productPresentation: ProductPresentationService
   productImage: ProductImageService
   coupon: CouponService
+  PaymentInformation: PaymentInformationService
+  PaymentConfirmation: PaymentConfirmationService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -62,6 +66,8 @@ export class PharmaTech {
     this.productPresentation = new ProductPresentationService(this.client)
     this.productImage = new ProductImageService(this.client)
     this.coupon = new CouponService(this.client)
+    this.PaymentInformation = new PaymentInformationService(this.client)
+    this.PaymentConfirmation = new PaymentConfirmationService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -72,7 +78,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.1'
+    return '0.4.2'
   }
 }
 

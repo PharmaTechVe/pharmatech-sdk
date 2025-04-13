@@ -22,4 +22,9 @@ export type ProductPresentation = BaseModel & {
 
 export type ProductPaginationRequest = PaginationRequest & {
   q?: string
+  manufacturerId?: string[]
+  categoryId?: string[]
+  branchId?: string[]
+  presentationId?: string[]
+  priceRange?: { min: number; max: number }
 }
