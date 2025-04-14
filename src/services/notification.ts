@@ -15,7 +15,7 @@ export class NotificationService {
       url: '/notification',
       jwt,
     })
-    return response as NotificationResponse
+    return response as unknown as NotificationResponse
   }
 
   async markAsRead(orderId: string, jwt: string): Promise<void> {
