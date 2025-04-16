@@ -20,3 +20,5 @@ export * from './payment-information'
 export * from './payment-confirmation'
 export * from './order'
 export * from './notification'
+
+export * from './profile-delivery'

@@ -20,6 +20,7 @@ import {
   PaymentInformationService,
   PaymentConfirmationService,
   NotificationService,
+  ProfileDeliveryService,
 } from './services'
 
 export class PharmaTech {
@@ -46,6 +47,8 @@ export class PharmaTech {
   PaymentConfirmation: PaymentConfirmationService
   notification: NotificationService
 
+  profileDeliveryService: ProfileDeliveryService
+
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
    */
@@ -71,6 +74,8 @@ export class PharmaTech {
     this.PaymentInformation = new PaymentInformationService(this.client)
     this.PaymentConfirmation = new PaymentConfirmationService(this.client)
     this.notification = new NotificationService(this.client)
+
+    this.profileDeliveryService = new ProfileDeliveryService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
