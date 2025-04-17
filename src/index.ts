@@ -21,6 +21,7 @@ import {
   PaymentConfirmationService,
   NotificationService,
 } from './services'
+import { OrderService } from './services/order'
 
 export class PharmaTech {
   private static instance: PharmaTech
@@ -42,9 +43,10 @@ export class PharmaTech {
   productPresentation: ProductPresentationService
   productImage: ProductImageService
   coupon: CouponService
-  PaymentInformation: PaymentInformationService
-  PaymentConfirmation: PaymentConfirmationService
+  paymentInformation: PaymentInformationService
+  paymentConfirmation: PaymentConfirmationService
   notification: NotificationService
+  order: OrderService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -68,9 +70,10 @@ export class PharmaTech {
     this.productPresentation = new ProductPresentationService(this.client)
     this.productImage = new ProductImageService(this.client)
     this.coupon = new CouponService(this.client)
-    this.PaymentInformation = new PaymentInformationService(this.client)
-    this.PaymentConfirmation = new PaymentConfirmationService(this.client)
+    this.paymentInformation = new PaymentInformationService(this.client)
+    this.paymentConfirmation = new PaymentConfirmationService(this.client)
     this.notification = new NotificationService(this.client)
+    this.order = new OrderService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -81,7 +84,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.2'
+    return '0.4.3'
   }
 }
 
