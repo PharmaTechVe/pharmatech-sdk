@@ -11,19 +11,19 @@ export class DeliveryService {
   private client: Client
   constructor(client: Client) {
     this.client = client
-    this.getDelivery = this.getDelivery.bind(this)
-    this.findAllOD = this.findAllOD.bind(this)
-    this.updateDelivery = this.updateDelivery.bind(this)
+    this.getById = this.getById.bind(this)
+    this.findAll = this.findAll.bind(this)
+    this.update = this.update.bind(this)
   }
 
-  async getDelivery(id: string): Promise<OrderDeliveryDetailedResponse> {
+  async getById(id: string): Promise<OrderDeliveryDetailedResponse> {
     const response = await this.client.get({
       url: `/delivery/${id}`,
     })
     return response as unknown as OrderDeliveryDetailedResponse
   }
 
-  async findAllOD({
+  async findAll({
     page = 1,
     limit = 10,
     q,
@@ -40,7 +40,7 @@ export class DeliveryService {
     return response as Pagination<OrderDeliveryResponse>
   }
 
-  async updateDelivery(
+  async update(
     id: string,
     partialOrder: Partial<UpdateOrderDelivery>,
     jwt: string,

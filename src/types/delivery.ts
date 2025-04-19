@@ -8,12 +8,8 @@ export type OrderDeliveryPaginationRequest = PaginationRequest & {
 }
 
 export type OrderDeliveryDetailResponse = {
-  userName: string
-  userPhone?: string
-  address: string
-  zipCode: string
-  additionalInformation?: string
-  referencePoint?: string
+  user: string[]
+  address: string[]
 }
 
 export type OrderDeliveryResponse = {
