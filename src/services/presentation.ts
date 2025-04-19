@@ -26,14 +26,13 @@ export class PresentationService {
     return response as unknown as PresentationResponse
   }
 
-  async findAll(
-    { page = 1, limit = 10 }: PaginationRequest,
-    jwt: string,
-  ): Promise<Pagination<PresentationResponse>> {
+  async findAll({
+    page = 1,
+    limit = 10,
+  }: PaginationRequest): Promise<Pagination<PresentationResponse>> {
     const response = await this.client.get({
       url: '/presentation',
       params: { page, limit },
-      jwt,
     })
     return response as Pagination<PresentationResponse>
   }
