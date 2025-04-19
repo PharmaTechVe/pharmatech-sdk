@@ -6,10 +6,10 @@ export class ProfileDeliveryService {
 
   constructor(client: Client) {
     this.client = client
-    this.updateUserMoto = this.updateUserMoto.bind(this)
+    this.update = this.update.bind(this)
   }
 
-  async updateUserMoto(
+  async update(
     id: string,
     partialUserAddress: Partial<UpdateProfileDelivery>,
     jwt: string,
