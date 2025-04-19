@@ -6,9 +6,16 @@ import type {
 import type { BaseModel } from './utils'
 import type { PromoResponse } from './promo'
 
+export type CreateProductPresentation = {
+  presentationId: string
+  price: number
+  promoId?: string
+}
+
 export type ProductPresentationResponse = BaseModel & {
   price: number
   presentation: PresentationResponse
+  promo?: PromoResponse
 }
 
 export type ProductPresentationDetailResponse = ProductPresentationResponse & {
@@ -18,5 +25,4 @@ export type ProductPresentationDetailResponse = ProductPresentationResponse & {
 export type OrderDetailProductPresentationResponse =
   ProductPresentationResponse & {
     product: OrderGenericProductResponse
-    promo: PromoResponse
   }

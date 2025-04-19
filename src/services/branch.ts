@@ -27,14 +27,15 @@ export class BranchService {
     return response as unknown as BranchResponse
   }
 
-  async findAll(
-    { page = 1, limit = 10, q, stateId }: PaginationBranchRequest,
-    jwt: string,
-  ): Promise<Pagination<BranchResponse>> {
+  async findAll({
+    page = 1,
+    limit = 10,
+    q,
+    stateId,
+  }: PaginationBranchRequest): Promise<Pagination<BranchResponse>> {
     const response = await this.client.get({
       url: '/branch',
       params: { page, limit, q, stateId },
-      jwt,
     })
     return response as Pagination<BranchResponse>
   }
