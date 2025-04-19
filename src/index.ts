@@ -20,6 +20,7 @@ import {
   PaymentInformationService,
   PaymentConfirmationService,
   NotificationService,
+  ProfileDeliveryService,
   DeliveryService,
 } from './services'
 import { OrderService } from './services/order'
@@ -50,6 +51,8 @@ export class PharmaTech {
   deliveryService: DeliveryService
   order: OrderService
 
+  profileDeliveryService: ProfileDeliveryService
+
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
    */
@@ -75,6 +78,7 @@ export class PharmaTech {
     this.paymentInformation = new PaymentInformationService(this.client)
     this.paymentConfirmation = new PaymentConfirmationService(this.client)
     this.notification = new NotificationService(this.client)
+    this.profileDeliveryService = new ProfileDeliveryService(this.client)
     this.deliveryService = new DeliveryService(this.client)
     this.order = new OrderService(this.client)
   }
