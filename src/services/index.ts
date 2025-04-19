@@ -18,5 +18,5 @@ export * from './coupon'
 export * from './payment-information'
 export * from './payment-confirmation'
 export * from './notification'
-
 export * from './profile-delivery'
+export * from './delivery'
