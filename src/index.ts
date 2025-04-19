@@ -20,6 +20,7 @@ import {
   PaymentInformationService,
   PaymentConfirmationService,
   NotificationService,
+  DeliveryService,
 } from './services'
 import { OrderService } from './services/order'
 
@@ -46,6 +47,7 @@ export class PharmaTech {
   paymentInformation: PaymentInformationService
   paymentConfirmation: PaymentConfirmationService
   notification: NotificationService
+  deliveryService: DeliveryService
   order: OrderService
 
   /**
@@ -73,6 +75,7 @@ export class PharmaTech {
     this.paymentInformation = new PaymentInformationService(this.client)
     this.paymentConfirmation = new PaymentConfirmationService(this.client)
     this.notification = new NotificationService(this.client)
+    this.deliveryService = new DeliveryService(this.client)
     this.order = new OrderService(this.client)
   }
 
