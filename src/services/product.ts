@@ -30,7 +30,9 @@ export class ProductService {
       categoryId: categoryId?.join(','),
       branchId: branchId?.join(','),
       presentationId: presentationId?.join(','),
-      priceRange: [priceRange?.min, priceRange?.max].join(','),
+      priceRange: priceRange
+        ? [priceRange?.min, priceRange?.max].join(',')
+        : undefined,
     }
     const response = await this.client.get({
       url: '/product',
