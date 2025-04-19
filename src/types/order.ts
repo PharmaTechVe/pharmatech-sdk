@@ -9,9 +9,21 @@ export enum OrderType {
 export enum OrderStatus {
   REQUESTED = 'requested',
   APPROVED = 'approved',
-  READY = 'ready',
+  READY_FOR_PICKUP = 'ready_for_pickup',
+  IN_PROGRESS = 'in_progress',
   COMPLETED = 'completed',
   CANCELED = 'canceled',
+}
+
+export enum OrderDeliveryStatus {
+  PAYMENT_PENDING = 'payment_pending',
+  PAYMENT_VALIDATED = 'payment_validated',
+  TO_ASSIGN = 'to_assign',
+  ASSIGNED = 'assigned',
+  WAITING_CONFIRMATION = 'waiting_confirmation',
+  PICKED_UP = 'picked_up',
+  IN_ROUTE = 'in_route',
+  DELIVERED = 'delivered',
 }
 
 export type CreateOrderDetail = {
