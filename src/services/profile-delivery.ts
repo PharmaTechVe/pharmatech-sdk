@@ -11,12 +11,12 @@ export class ProfileDeliveryService {
 
   async update(
     id: string,
-    partialUserAddress: Partial<UpdateProfileDelivery>,
+    partialProfileDelivery: Partial<UpdateProfileDelivery>,
     jwt: string,
   ): Promise<UpdateProfileDelivery> {
     const response = await this.client.patch({
       url: `/user/${id}/moto`,
-      data: partialUserAddress,
+      data: partialProfileDelivery,
       jwt,
     })
     return response as unknown as UpdateProfileDelivery
