@@ -15,17 +15,6 @@ export enum OrderStatus {
   CANCELED = 'canceled',
 }
 
-export enum OrderDeliveryStatus {
-  PAYMENT_PENDING = 'payment_pending',
-  PAYMENT_VALIDATED = 'payment_validated',
-  TO_ASSIGN = 'to_assign',
-  ASSIGNED = 'assigned',
-  WAITING_CONFIRMATION = 'waiting_confirmation',
-  PICKED_UP = 'picked_up',
-  IN_ROUTE = 'in_route',
-  DELIVERED = 'delivered',
-}
-
 export type CreateOrderDetail = {
   productPresentationId: string
   quantity: number
