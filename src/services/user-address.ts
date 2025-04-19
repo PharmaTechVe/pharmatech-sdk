@@ -9,7 +9,6 @@ export class UserAddressService {
     this.getListAddresses = this.getListAddresses.bind(this)
     this.createAddress = this.createAddress.bind(this)
     this.deleteAddress = this.deleteAddress.bind(this)
-    this.update = this.update.bind(this)
   }
 
   async getAddress(
