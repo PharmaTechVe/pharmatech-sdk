@@ -20,6 +20,7 @@ export class ProductService {
     categoryId,
     branchId,
     presentationId,
+    genericProductId,
     priceRange,
   }: ProductPaginationRequest): Promise<Pagination<ProductPresentation>> {
     const params = {
@@ -30,6 +31,7 @@ export class ProductService {
       categoryId: categoryId?.join(','),
       branchId: branchId?.join(','),
       presentationId: presentationId?.join(','),
+      genericProductId: genericProductId?.join(','),
       priceRange: priceRange
         ? [priceRange?.min, priceRange?.max].join(',')
         : undefined,

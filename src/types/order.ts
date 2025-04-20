@@ -1,3 +1,5 @@
+import type { BranchResponse } from './branch'
+import type { OrderDeliveryDetail } from './delivery'
 import type { OrderDetailProductPresentationResponse } from './product-presentation'
 import type { BaseModel, PaginationRequest } from './utils'
 
@@ -41,6 +43,8 @@ export type OrderResponse = BaseModel & {
 
 export type OrderDetailedResponse = OrderResponse & {
   details: OrderDetailResponse[]
+  branch?: BranchResponse
+  orderDeliveries?: OrderDeliveryDetail[]
 }
 
 export type OrderPaginationRequest = PaginationRequest & {
