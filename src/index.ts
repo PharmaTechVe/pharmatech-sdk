@@ -22,8 +22,9 @@ import {
   NotificationService,
   ProfileDeliveryService,
   DeliveryService,
+  OrderService,
+  ProductCategoryService,
 } from './services'
-import { OrderService } from './services/order'
 
 export class PharmaTech {
   private static instance: PharmaTech
@@ -44,6 +45,7 @@ export class PharmaTech {
   userAdress: UserAddressService
   productPresentation: ProductPresentationService
   productImage: ProductImageService
+  productCategory: ProductCategoryService
   coupon: CouponService
   paymentInformation: PaymentInformationService
   paymentConfirmation: PaymentConfirmationService
@@ -81,6 +83,7 @@ export class PharmaTech {
     this.profileDeliveryService = new ProfileDeliveryService(this.client)
     this.deliveryService = new DeliveryService(this.client)
     this.order = new OrderService(this.client)
+    this.productCategory = new ProductCategoryService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -91,7 +94,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.4'
+    return '0.4.5'
   }
 }
 

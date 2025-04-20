@@ -17,9 +17,16 @@ export type OrderDeliveryPaginationRequest = PaginationRequest & {
   employeeId?: string
 }
 
-export type OrderDeliveryDetailResponse = {
-  user: string[]
-  address: string[]
+export type UserOrderDeliveryDetailResponse = {
+  firstName: string
+  lastName: string
+  phoneNumber: string
+}
+
+export type AddressOrderDeliveryDetailResponse = {
+  zipCode: string
+  additionalInformation: string
+  referencePoint: string
 }
 
 export type OrderDeliveryResponse = {
@@ -37,5 +44,6 @@ export type UpdateOrderDelivery = {
 }
 
 export type OrderDeliveryDetailedResponse = OrderDeliveryResponse & {
-  details: OrderDeliveryDetailResponse[]
+  user: UserOrderDeliveryDetailResponse
+  address: AddressOrderDeliveryDetailResponse
 }
