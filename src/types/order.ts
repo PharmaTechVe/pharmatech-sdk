@@ -44,7 +44,7 @@ export type OrderResponse = BaseModel & {
 export type OrderDetailedResponse = OrderResponse & {
   details: OrderDetailResponse[]
   branch?: BranchResponse
-  orderDeliveries?: OrderDeliveryDetail
+  orderDeliveries?: OrderDeliveryDetail[]
 }
 
 export type OrderPaginationRequest = PaginationRequest & {
