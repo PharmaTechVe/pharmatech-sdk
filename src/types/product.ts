@@ -26,5 +26,6 @@ export type ProductPaginationRequest = PaginationRequest & {
   categoryId?: string[]
   branchId?: string[]
   presentationId?: string[]
+  genericProductId?: string[]
   priceRange?: { min: number; max: number }
 }
