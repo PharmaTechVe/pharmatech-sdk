@@ -47,3 +47,9 @@ export type OrderDeliveryDetailedResponse = OrderDeliveryResponse & {
   user: UserOrderDeliveryDetailResponse
   address: AddressOrderDeliveryDetailResponse
 }
+
+export type OrderDeliveryDetail = {
+  deliveryStatus: OrderDeliveryStatus
+  estimatedTime: Date
+  employee: UserOrderDeliveryDetailResponse
+}
