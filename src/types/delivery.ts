@@ -44,6 +44,6 @@ export type UpdateOrderDelivery = {
 }
 
 export type OrderDeliveryDetailedResponse = OrderDeliveryResponse & {
-  user: UserOrderDeliveryDetailResponse[]
-  address: AddressOrderDeliveryDetailResponse[]
+  user: UserOrderDeliveryDetailResponse
+  address: AddressOrderDeliveryDetailResponse
 }
