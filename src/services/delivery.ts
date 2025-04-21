@@ -16,26 +16,32 @@ export class DeliveryService {
     this.update = this.update.bind(this)
   }
 
-  async getById(id: string): Promise<OrderDeliveryDetailedResponse> {
+  async getById(
+    id: string,
+    jwt: string,
+  ): Promise<OrderDeliveryDetailedResponse> {
     const response = await this.client.get({
       url: `/delivery/${id}`,
+      jwt,
     })
     return response as unknown as OrderDeliveryDetailedResponse
   }
 
-  async findAll({
-    page = 1,
-    limit = 10,
-    q,
-    status,
-    branchId,
-    employeeId,
-  }: OrderDeliveryPaginationRequest): Promise<
-    Pagination<OrderDeliveryResponse>
-  > {
+  async findAll(
+    {
+      page = 1,
+      limit = 10,
+      q,
+      status,
+      branchId,
+      employeeId,
+    }: OrderDeliveryPaginationRequest,
+    jwt: string,
+  ): Promise<Pagination<OrderDeliveryResponse>> {
     const response = await this.client.get({
       url: '/delivery',
       params: { page, limit, q, status, branchId, employeeId },
+      jwt,
     })
     return response as Pagination<OrderDeliveryResponse>
   }
