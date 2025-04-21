@@ -19,25 +19,30 @@ export class OrderService {
     this.update = this.update.bind(this)
   }
 
-  async getById(id: string): Promise<OrderDetailedResponse> {
+  async getById(id: string, jwt: string): Promise<OrderDetailedResponse> {
     const response = await this.client.get({
       url: `/order/${id}`,
+      jwt,
     })
     return response as unknown as OrderDetailedResponse
   }
 
-  async findAll({
-    page = 1,
-    limit = 10,
-    q,
-    userId,
-    branchId,
-    type,
-    status,
-  }: OrderPaginationRequest): Promise<Pagination<OrderResponse>> {
+  async findAll(
+    {
+      page = 1,
+      limit = 10,
+      q,
+      userId,
+      branchId,
+      type,
+      status,
+    }: OrderPaginationRequest,
+    jwt: string,
+  ): Promise<Pagination<OrderResponse>> {
     const response = await this.client.get({
       url: '/order',
       params: { page, limit, q, userId, branchId, type, status },
+      jwt,
     })
     return response as Pagination<OrderResponse>
   }
