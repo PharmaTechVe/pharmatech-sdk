@@ -1,4 +1,4 @@
-import type { PaginationRequest } from './utils'
+import type { PaginationRequest, BaseModel } from './utils'
 
 export enum OrderDeliveryStatus {
   PAYMENT_PENDING = 'payment_pending',
@@ -24,18 +24,18 @@ export type UserOrderDeliveryDetailResponse = {
 }
 
 export type AddressOrderDeliveryDetailResponse = {
+  address: string
   zipCode: string
   additionalInformation: string
   referencePoint: string
 }
 
-export type OrderDeliveryResponse = {
-  id: string
+export type OrderDeliveryResponse = BaseModel & {
   orderId: string
-  deliveryStatus: OrderDeliveryStatus
-  estimatedTime: string
   branchId: string
   employeeId: string
+  deliveryStatus: OrderDeliveryStatus
+  estimatedTime: Date
 }
 
 export type UpdateOrderDelivery = {
