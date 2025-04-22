@@ -26,18 +26,12 @@ export class PaymentInformationService {
     return response as unknown as PaymentInfoResponse
   }
 
-  async findAll({
-    page = 1,
-    limit = 10,
-    paymentMethod,
-  }: PaginationRequest & { paymentMethod?: PaymentMethod }): Promise<
-    Pagination<PaymentInfoResponse>
-  > {
+  async findAll(paymentMethod?: PaymentMethod): Promise<PaymentInfoResponse> {
     const response = await this.client.get({
       url: '/payment-information',
-      params: { page, limit, paymentMethod },
+      params: { paymentMethod },
     })
-    return response as Pagination<PaymentInfoResponse>
+    return response as unknown as PaymentInfoResponse
   }
 
   async create(
