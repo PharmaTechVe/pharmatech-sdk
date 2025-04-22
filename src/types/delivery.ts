@@ -21,6 +21,8 @@ export type UserOrderDeliveryDetailResponse = {
   firstName: string
   lastName: string
   phoneNumber: string
+  email: string
+  profilePicture: string
 }
 
 export type AddressOrderDeliveryDetailResponse = {
@@ -28,6 +30,8 @@ export type AddressOrderDeliveryDetailResponse = {
   zipCode: string
   additionalInformation: string
   referencePoint: string
+  latitude: number
+  longitude: number
 }
 
 export type OrderDeliveryResponse = BaseModel & {
