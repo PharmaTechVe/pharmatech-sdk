@@ -48,7 +48,7 @@ export type OrderDeliveryDetailedResponse = OrderDeliveryResponse & {
   address: AddressOrderDeliveryDetailResponse
 }
 
-export type OrderDeliveryDetail = {
+export type OrderDeliveryDetail = BaseModel & {
   deliveryStatus: OrderDeliveryStatus
   estimatedTime: Date
   employee: UserOrderDeliveryDetailResponse
