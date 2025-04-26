@@ -18,6 +18,7 @@ export type ProductPresentation = BaseModel & {
   price: number
   presentation: PresentationResponse
   product: Product
+  stock: number
 }
 
 export type ProductPaginationRequest = PaginationRequest & {
