@@ -27,7 +27,6 @@ export type UserOrderDeliveryDetailResponse = {
 
 export type AddressOrderDeliveryDetailResponse = {
   adress: string
-  zipCode: string
   additionalInformation: string
   referencePoint: string
   latitude: number

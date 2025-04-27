@@ -1,6 +1,5 @@
 export type UserAddressResponse = {
   adress: string
-  zipCode: string
   latitude: number | null
   longitude: number | null
   cityId: string
@@ -14,7 +13,6 @@ export type UserAddressResponse = {
 
 export type CreateUserAddressRequest = {
   adress: string
-  zipCode: string
   latitude: number | null
   longitude: number | null
   cityId: string

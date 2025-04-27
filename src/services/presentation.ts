@@ -29,10 +29,11 @@ export class PresentationService {
   async findAll({
     page = 1,
     limit = 10,
+    q,
   }: PaginationRequest): Promise<Pagination<PresentationResponse>> {
     const response = await this.client.get({
       url: '/presentation',
-      params: { page, limit },
+      params: { page, limit, q },
     })
     return response as Pagination<PresentationResponse>
   }
