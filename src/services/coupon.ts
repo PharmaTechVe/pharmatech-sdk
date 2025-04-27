@@ -1,9 +1,9 @@
 import type { Client } from '../client'
 import type {
   Pagination,
-  PaginationRequest,
   Coupon,
   CouponResponse,
+  CouponPaginationRequest,
 } from '../types'
 
 export class CouponService {
@@ -27,12 +27,20 @@ export class CouponService {
   }
 
   async findAll(
-    { page = 1, limit = 10, q }: PaginationRequest,
+    { page = 1, limit = 10, q, expirationBetween }: CouponPaginationRequest,
     jwt: string,
   ): Promise<Pagination<CouponResponse>> {
+    const params = {
+      page,
+      limit,
+      q,
+      expirationBetween: expirationBetween
+        ? [expirationBetween.start, expirationBetween.end].join(',')
+        : undefined,
+    }
     const response = await this.client.get({
       url: '/coupon',
-      params: { page, limit, q },
+      params,
       jwt,
     })
     return response as Pagination<CouponResponse>

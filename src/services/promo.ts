@@ -1,8 +1,8 @@
 import type { Client } from '../client'
 import type {
   Pagination,
-  PaginationRequest,
   Promo,
+  PromoPaginationRequest,
   PromoResponse,
 } from '../types'
 
@@ -27,12 +27,20 @@ export class PromoService {
   }
 
   async findAll(
-    { page = 1, limit = 10, q }: PaginationRequest,
+    { page = 1, limit = 10, q, expirationBetween }: PromoPaginationRequest,
     jwt: string,
   ): Promise<Pagination<PromoResponse>> {
+    const params = {
+      page,
+      limit,
+      q,
+      expirationBetween: expirationBetween
+        ? [expirationBetween.start, expirationBetween.end].join(',')
+        : undefined,
+    }
     const response = await this.client.get({
       url: '/promo',
-      params: { page, limit, q },
+      params,
       jwt,
     })
     return response as Pagination<PromoResponse>
