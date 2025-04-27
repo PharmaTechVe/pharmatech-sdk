@@ -85,7 +85,7 @@ export class PharmaTech {
     this.deliveryService = new DeliveryService(this.client)
     this.order = new OrderService(this.client)
     this.productCategory = new ProductCategoryService(this.client)
-    this.bank = new BankService(this.client)
+    this.bank = new BankService()
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -96,7 +96,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.10'
+    return '0.4.11'
   }
 }
 
