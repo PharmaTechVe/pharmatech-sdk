@@ -10,6 +10,7 @@ export class ProductService {
   constructor(client: Client) {
     this.client = client
     this.getProducts = this.getProducts.bind(this)
+    this.getRecommendations = this.getRecommendations.bind(this)
   }
 
   async getProducts({
@@ -39,6 +40,17 @@ export class ProductService {
     const response = await this.client.get({
       url: '/product',
       params,
+    })
+
+    return response as unknown as Pagination<ProductPresentation>
+  }
+
+  async getRecommendations(
+    jwt: string,
+  ): Promise<Pagination<ProductPresentation>> {
+    const response = await this.client.get({
+      url: '/product/recommendations',
+      jwt,
     })
 
     return response as unknown as Pagination<ProductPresentation>
