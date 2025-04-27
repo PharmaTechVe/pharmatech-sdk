@@ -27,12 +27,12 @@ export class PromoService {
   }
 
   async findAll(
-    { page = 1, limit = 10 }: PaginationRequest,
+    { page = 1, limit = 10, q }: PaginationRequest,
     jwt: string,
   ): Promise<Pagination<PromoResponse>> {
     const response = await this.client.get({
       url: '/promo',
-      params: { page, limit },
+      params: { page, limit, q },
       jwt,
     })
     return response as Pagination<PromoResponse>
