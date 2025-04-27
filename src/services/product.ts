@@ -23,6 +23,7 @@ export class ProductService {
     presentationId,
     genericProductId,
     priceRange,
+    isVisible,
   }: ProductPaginationRequest): Promise<Pagination<ProductPresentation>> {
     const params = {
       page: page || 1,
@@ -36,6 +37,7 @@ export class ProductService {
       priceRange: priceRange
         ? [priceRange?.min, priceRange?.max].join(',')
         : undefined,
+      isVisible,
     }
     const response = await this.client.get({
       url: '/product',
