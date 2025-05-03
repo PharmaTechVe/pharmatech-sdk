@@ -25,6 +25,7 @@ import {
   OrderService,
   ProductCategoryService,
   BankService,
+  ReportService,
 } from './services'
 
 export class PharmaTech {
@@ -55,6 +56,7 @@ export class PharmaTech {
   order: OrderService
   bank: BankService
   profileDeliveryService: ProfileDeliveryService
+  report: ReportService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -86,6 +88,7 @@ export class PharmaTech {
     this.order = new OrderService(this.client)
     this.productCategory = new ProductCategoryService(this.client)
     this.bank = new BankService()
+    this.report = new ReportService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
