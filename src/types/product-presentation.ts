@@ -27,3 +27,10 @@ export type OrderDetailProductPresentationResponse =
   ProductPresentationResponse & {
     product: OrderGenericProductResponse
   }
+
+export type CartDetailProductPresentationResponse = BaseModel & {
+  product: OrderGenericProductResponse
+  presentation: PresentationResponse
+  promo?: PromoResponse
+  price: number
+}

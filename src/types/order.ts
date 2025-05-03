@@ -33,6 +33,7 @@ export type CreateOrder = {
   products: CreateOrderDetail[]
   branchId?: string
   userAddressId?: string
+  couponCode?: string
 }
 
 export type OrderResponse = BaseModel & {
