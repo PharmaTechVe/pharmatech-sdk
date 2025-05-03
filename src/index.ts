@@ -25,6 +25,8 @@ import {
   OrderService,
   ProductCategoryService,
   CartService,
+  BankService,
+  ReportService,
 } from './services'
 
 export class PharmaTech {
@@ -53,8 +55,10 @@ export class PharmaTech {
   notification: NotificationService
   deliveryService: DeliveryService
   order: OrderService
-  profileDeliveryService: ProfileDeliveryService
   cart: CartService
+  bank: BankService
+  profileDeliveryService: ProfileDeliveryService
+  report: ReportService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -86,6 +90,8 @@ export class PharmaTech {
     this.order = new OrderService(this.client)
     this.productCategory = new ProductCategoryService(this.client)
     this.cart = new CartService(this.client)
+    this.bank = new BankService()
+    this.report = new ReportService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -96,7 +102,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.8'
+    return '0.4.11'
   }
 }
 

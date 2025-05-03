@@ -1,4 +1,4 @@
-import type { BaseModel } from './utils'
+import type { BaseModel, PaginationRequest } from './utils'
 
 export type Promo = {
   name: string
@@ -8,3 +8,10 @@ export type Promo = {
 }
 
 export type PromoResponse = Promo & BaseModel
+
+export type PromoPaginationRequest = PaginationRequest & {
+  expirationBetween?: {
+    start: Date
+    end: Date
+  }
+}

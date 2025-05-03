@@ -15,6 +15,7 @@ export type CreateProductPresentation = {
 export type ProductPresentationResponse = BaseModel & {
   price: number
   presentation: PresentationResponse
+  stock: number
   promo?: PromoResponse
 }
 
