@@ -102,7 +102,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.11'
+    return '0.4.12'
   }
 }
 
