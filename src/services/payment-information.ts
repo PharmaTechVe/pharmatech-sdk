@@ -26,12 +26,12 @@ export class PaymentInformationService {
     return response as unknown as PaymentInfoResponse
   }
 
-  async findAll(paymentMethod?: PaymentMethod): Promise<PaymentInfoResponse> {
+  async findAll(paymentMethod?: PaymentMethod): Promise<PaymentInfoResponse[]> {
     const response = await this.client.get({
       url: '/payment-information',
       params: { paymentMethod },
     })
-    return response as unknown as PaymentInfoResponse
+    return response as unknown as PaymentInfoResponse[]
   }
 
   async create(
