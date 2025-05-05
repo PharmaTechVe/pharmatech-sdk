@@ -16,7 +16,6 @@ export type OrdersByStatusItem = {
   count: number
 }
 export type OrdersByStatusResponse = OrdersByStatusItem[]
-
 export type SalesReportItem = {
   orderId: string
   user: string
