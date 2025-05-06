@@ -30,4 +30,5 @@ export type ProductPaginationRequest = PaginationRequest & {
   genericProductId?: string[]
   priceRange?: { min: number; max: number }
   isVisible?: boolean
+  id?: string[]
 }
