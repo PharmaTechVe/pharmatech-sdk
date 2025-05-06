@@ -5,6 +5,7 @@ export type PaymentConfirmation = {
   reference: string
   documentId: string
   phoneNumber: string
+  orderId: string
 }
 
 export type PaymentConfirmationResponse = PaymentConfirmation & BaseModel
