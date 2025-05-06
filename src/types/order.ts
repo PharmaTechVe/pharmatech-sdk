@@ -1,5 +1,6 @@
 import type { BranchResponse } from './branch'
 import type { OrderDeliveryDetail } from './delivery'
+import type { PaymentMethod } from './payment-information'
 import type { OrderDetailProductPresentationResponse } from './product-presentation'
 import type { BaseModel, PaginationRequest } from './utils'
 
@@ -31,6 +32,7 @@ export type OrderDetailResponse = BaseModel & {
 export type CreateOrder = {
   type: OrderType
   products: CreateOrderDetail[]
+  paymentMethod: PaymentMethod
   branchId?: string
   userAddressId?: string
   couponCode?: string
@@ -38,6 +40,7 @@ export type CreateOrder = {
 
 export type OrderResponse = BaseModel & {
   type: OrderType
+  paymentMethod: PaymentMethod
   status: OrderStatus
   totalPrice: number
 }

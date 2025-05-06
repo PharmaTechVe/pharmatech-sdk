@@ -1,7 +1,5 @@
 import type { Client } from '../client'
 import type {
-  Pagination,
-  PaginationRequest,
   PaymentInfoResponse,
   PaymentInformation,
   PaymentMethod,
