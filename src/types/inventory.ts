@@ -18,3 +18,13 @@ export type InventoryPaginationRequest = PaginationRequest & {
   branchId?: string
   productPresentationId?: string
 }
+
+export type InventoryBulkDetail = {
+  productPresentationId: string
+  quantity: number
+  expirationDate: Date
+}
+
+export type UpdateInventoryBulk = {
+  inventories: InventoryBulkDetail[]
+}
