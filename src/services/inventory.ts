@@ -4,6 +4,7 @@ import type {
   InventoryPaginationRequest,
   InventoryResponse,
   Pagination,
+  UpdateInventoryBulk,
 } from '../types'
 
 export class InventoryService {
@@ -58,6 +59,18 @@ export class InventoryService {
       jwt,
     })
     return response as unknown as InventoryResponse
+  }
+
+  async bulkUpdate(
+    data: UpdateInventoryBulk,
+    jwt: string,
+  ): Promise<InventoryResponse[]> {
+    const response = await this.client.post({
+      url: '/inventory/bulk',
+      data,
+      jwt,
+    })
+    return response as unknown as InventoryResponse[]
   }
 
   async delete(id: string, jwt: string): Promise<void> {
