@@ -3,6 +3,7 @@ import type { Manufacturer } from './manufacturer'
 import type { BaseModel, PaginationRequest } from './utils'
 import type { Category } from './category'
 import type { PresentationResponse } from './presentation'
+import type { PromoResponse } from './promo'
 
 export type Product = BaseModel & {
   name: string
@@ -18,6 +19,7 @@ export type ProductPresentation = BaseModel & {
   price: number
   presentation: PresentationResponse
   product: Product
+  promo?: PromoResponse
   stock: number
 }
 
