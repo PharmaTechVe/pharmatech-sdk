@@ -5,6 +5,7 @@ export class ActivePrincipleService {
   client: Client
   constructor(client: Client) {
     this.client = client
+    this.findAll = this.findAll.bind(this)
   }
 
   async findAll(
