@@ -1,5 +1,6 @@
 import { Client } from '../client'
 import type {
+  BulkUpdateUser,
   CreateUser,
   Pagination,
   PaginationUserRequest,
@@ -15,6 +16,7 @@ export class UserService {
     this.findAll = this.findAll.bind(this)
     this.update = this.update.bind(this)
     this.delete = this.delete.bind(this)
+    this.bulkUpdate = this.bulkUpdate.bind(this)
   }
 
   async getProfile(userId: string, jwt: string): Promise<UserList> {
@@ -62,6 +64,14 @@ export class UserService {
   async delete(userId: string, jwt: string): Promise<void> {
     await this.client.delete({
       url: `/user/${userId}`,
+      jwt,
+    })
+  }
+
+  async bulkUpdate(data: BulkUpdateUser, jwt: string): Promise<void> {
+    await this.client.patch({
+      url: '/user/bulk',
+      data,
       jwt,
     })
   }

@@ -4,6 +4,8 @@ import type {
   Coupon,
   CouponResponse,
   CouponPaginationRequest,
+  BulkUpdateCoupon,
+  BulkDeleteCoupon,
 } from '../types'
 
 export class CouponService {
@@ -16,6 +18,8 @@ export class CouponService {
     this.create = this.create.bind(this)
     this.update = this.update.bind(this)
     this.delete = this.delete.bind(this)
+    this.bulkUpdate = this.bulkUpdate.bind(this)
+    this.bulkDelete = this.bulkDelete.bind(this)
   }
 
   async getByCode(code: string, jwt: string): Promise<CouponResponse> {
@@ -71,6 +75,22 @@ export class CouponService {
   async delete(code: string, jwt: string): Promise<void> {
     await this.client.delete({
       url: `/coupon/${code}`,
+      jwt,
+    })
+  }
+
+  async bulkUpdate(data: BulkUpdateCoupon, jwt: string): Promise<void> {
+    await this.client.patch({
+      url: '/coupon/bulk',
+      data,
+      jwt,
+    })
+  }
+
+  async bulkDelete(data: BulkDeleteCoupon, jwt: string): Promise<void> {
+    await this.client.delete({
+      url: '/coupon/bulk',
+      data,
       jwt,
     })
   }

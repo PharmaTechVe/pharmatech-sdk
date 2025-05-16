@@ -5,6 +5,7 @@ import type {
   OrderResponse,
   OrderDetailedResponse,
   Pagination,
+  BulkUpdateOrder,
 } from '../types'
 import type { Client } from '../client'
 
@@ -17,6 +18,7 @@ export class OrderService {
     this.findAll = this.findAll.bind(this)
     this.create = this.create.bind(this)
     this.update = this.update.bind(this)
+    this.bulkUpdate = this.bulkUpdate.bind(this)
   }
 
   async getById(id: string, jwt: string): Promise<OrderDetailedResponse> {
@@ -67,5 +69,13 @@ export class OrderService {
       jwt,
     })
     return response as unknown as OrderDetailedResponse
+  }
+
+  async bulkUpdate(data: BulkUpdateOrder, jwt: string): Promise<void> {
+    await this.client.patch({
+      url: '/order/bulk',
+      data,
+      jwt,
+    })
   }
 }
