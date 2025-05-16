@@ -36,6 +36,7 @@ export type UserList = BaseModel & {
   role: string
   isValidated: boolean
   profile: Profile
+  isGenericPassword: boolean
 }
 
 export type UpdateUser = {
@@ -57,8 +58,19 @@ export type CreateUser = {
   birthDate: string
   gender: UserGender
   role: UserRole
+  branchId?: string
 }
 
 export type PaginationUserRequest = PaginationRequest & {
   role?: UserRole
+}
+
+export type BulkUserData = {
+  isValidated: boolean
+  role: UserRole
+}
+
+export type BulkUpdateUser = {
+  users: string[]
+  data: BulkUserData
 }

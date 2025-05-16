@@ -34,3 +34,8 @@ export type CartDetailProductPresentationResponse = BaseModel & {
   promo?: PromoResponse
   price: number
 }
+
+export type BulkUpdateProductPresentation = {
+  ids: string[]
+  isVisible: boolean
+}
