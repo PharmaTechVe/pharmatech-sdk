@@ -26,6 +26,7 @@ export type CreateOrderDetail = {
 export type OrderDetailResponse = BaseModel & {
   productPresentation: OrderDetailProductPresentationResponse
   quantity: number
+  price: number
   subtotal: number
 }
 
@@ -59,5 +60,10 @@ export type OrderPaginationRequest = PaginationRequest & {
 }
 
 export type UpdateOrder = {
+  status: OrderStatus
+}
+
+export type BulkUpdateOrder = {
+  orders: string[]
   status: OrderStatus
 }

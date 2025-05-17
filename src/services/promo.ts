@@ -1,5 +1,7 @@
 import type { Client } from '../client'
 import type {
+  BulkDeletePromo,
+  BulkUpdatePromo,
   Pagination,
   Promo,
   PromoPaginationRequest,
@@ -16,6 +18,8 @@ export class PromoService {
     this.create = this.create.bind(this)
     this.update = this.update.bind(this)
     this.delete = this.delete.bind(this)
+    this.bulkUpdate = this.bulkUpdate.bind(this)
+    this.bulkDelete = this.bulkDelete.bind(this)
   }
 
   async getById(id: string, jwt: string): Promise<PromoResponse> {
@@ -71,6 +75,22 @@ export class PromoService {
   async delete(id: string, jwt: string): Promise<void> {
     await this.client.delete({
       url: `/promo/${id}`,
+      jwt,
+    })
+  }
+
+  async bulkUpdate(data: BulkUpdatePromo, jwt: string): Promise<void> {
+    await this.client.patch({
+      url: '/promo/bulk',
+      data,
+      jwt,
+    })
+  }
+
+  async bulkDelete(data: BulkDeletePromo, jwt: string): Promise<void> {
+    await this.client.delete({
+      url: '/promo/bulk',
+      data,
       jwt,
     })
   }

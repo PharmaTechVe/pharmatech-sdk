@@ -15,3 +15,12 @@ export type PromoPaginationRequest = PaginationRequest & {
     end: Date
   }
 }
+
+export type BulkUpdatePromo = {
+  ids: string[]
+  expiredAt: Date
+}
+
+export type BulkDeletePromo = {
+  ids: string[]
+}

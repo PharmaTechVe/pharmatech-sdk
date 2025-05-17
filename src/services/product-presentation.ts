@@ -1,5 +1,6 @@
 import type { Client } from '../client'
 import type {
+  BulkUpdateProductPresentation,
   CreateProductPresentation,
   ProductPresentationDetailResponse,
   ProductPresentationResponse,
@@ -15,6 +16,7 @@ export class ProductPresentationService {
     this.getByPresentationId = this.getByPresentationId.bind(this)
     this.update = this.update.bind(this)
     this.delete = this.delete.bind(this)
+    this.bulkUpdate = this.bulkUpdate.bind(this)
   }
 
   async getByProductId(
@@ -65,6 +67,17 @@ export class ProductPresentationService {
   async delete(productId: string, presentationId: string): Promise<void> {
     await this.client.delete({
       url: `/product/${productId}/presentation/${presentationId}`,
+    })
+  }
+
+  async bulkUpdate(
+    data: BulkUpdateProductPresentation,
+    jwt: string,
+  ): Promise<void> {
+    await this.client.patch({
+      url: '/product/presentation/bulk',
+      data,
+      jwt,
     })
   }
 }
