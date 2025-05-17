@@ -17,14 +17,10 @@ export type CouponPaginationRequest = PaginationRequest & {
   }
 }
 
-export type BulkCouponData = {
-  expirationDate?: Date
-  maxUses?: number
-}
-
 export type BulkUpdateCoupon = {
   ids: string[]
-  data: BulkCouponData
+  expirationDate?: Date
+  maxUses?: number
 }
 
 export type BulkDeleteCoupon = {
