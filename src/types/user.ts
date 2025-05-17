@@ -66,8 +66,8 @@ export type PaginationUserRequest = PaginationRequest & {
 }
 
 export type BulkUserData = {
-  isValidated: boolean
-  role: UserRole
+  isValidated?: boolean
+  role?: UserRole
 }
 
 export type BulkUpdateUser = {
