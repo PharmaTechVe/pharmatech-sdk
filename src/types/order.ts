@@ -1,5 +1,6 @@
 import type { BranchResponse } from './branch'
 import type { OrderDeliveryDetail } from './delivery'
+import type { PaymentConfirmationResponse } from './payment-confirmation'
 import type { PaymentMethod } from './payment-information'
 import type { OrderDetailProductPresentationResponse } from './product-presentation'
 import type { BaseModel, PaginationRequest } from './utils'
@@ -28,6 +29,7 @@ export type OrderDetailResponse = BaseModel & {
   quantity: number
   price: number
   subtotal: number
+  paymentConfirmation?: PaymentConfirmationResponse
 }
 
 export type CreateOrder = {
