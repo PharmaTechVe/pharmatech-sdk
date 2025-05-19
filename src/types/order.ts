@@ -29,7 +29,7 @@ export type OrderDetailResponse = BaseModel & {
   quantity: number
   price: number
   subtotal: number
-  paymentConfirmation: PaymentConfirmationResponse
+  paymentConfirmation?: PaymentConfirmationResponse
 }
 
 export type CreateOrder = {
