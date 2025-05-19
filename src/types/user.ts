@@ -1,4 +1,5 @@
 import type { UserGender } from './auth'
+import type { BranchResponse } from './branch'
 import type { BaseModel, PaginationRequest } from './utils'
 
 export enum UserRole {
@@ -37,6 +38,8 @@ export type UserList = BaseModel & {
   isValidated: boolean
   profile: Profile
   isGenericPassword: boolean
+  isMobileCustomer: boolean
+  branch: BranchResponse
 }
 
 export type UpdateUser = {
