@@ -43,6 +43,7 @@ export class Client {
         data: config.data,
         params: config.params,
       })
+      this.client.interceptors.request.clear()
       return response.data
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: unknown) {
