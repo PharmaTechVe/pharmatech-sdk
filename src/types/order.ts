@@ -29,7 +29,7 @@ export type OrderDetailResponse = BaseModel & {
   quantity: number
   price: number
   subtotal: number
-  paymentConfirmation?: PaymentConfirmationResponse
+  discount: number
 }
 
 export type CreateOrder = {
@@ -46,6 +46,7 @@ export type OrderResponse = BaseModel & {
   paymentMethod: PaymentMethod
   status: OrderStatus
   totalPrice: number
+  paymentConfirmation?: PaymentConfirmationResponse
 }
 
 export type OrderDetailedResponse = OrderResponse & {
@@ -62,7 +63,8 @@ export type OrderPaginationRequest = PaginationRequest & {
 }
 
 export type UpdateOrder = {
-  status: OrderStatus
+  status?: OrderStatus
+  branchId?: string
 }
 
 export type BulkUpdateOrder = {
