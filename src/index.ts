@@ -29,6 +29,7 @@ import {
   ReportService,
   ActivePrincipleService,
   SalesPredictionService,
+  LotService,
 } from './services'
 
 export class PharmaTech {
@@ -63,6 +64,7 @@ export class PharmaTech {
   report: ReportService
   activePrinciple: ActivePrincipleService
   salesPrediction: SalesPredictionService
+  lot: LotService
 
   /**
    * @deprecated Use `PharmaTech.getInstance()` instead.
@@ -98,6 +100,7 @@ export class PharmaTech {
     this.report = new ReportService(this.client)
     this.activePrinciple = new ActivePrincipleService(this.client)
     this.salesPrediction = new SalesPredictionService(this.client)
+    this.lot = new LotService(this.client)
   }
 
   static getInstance(isDevMode = false): PharmaTech {
@@ -108,7 +111,7 @@ export class PharmaTech {
   }
 
   version(): string {
-    return '0.4.20'
+    return '0.4.21'
   }
 }
 
