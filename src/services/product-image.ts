@@ -16,10 +16,12 @@ export class ProductImageService {
   async create(
     productId: string,
     productImage: CreateProductImage,
+    jwt: string,
   ): Promise<void> {
     await this.client.post({
       url: `/product/${productId}/image`,
       data: productImage,
+      jwt,
     })
   }
 
@@ -43,17 +45,20 @@ export class ProductImageService {
     productId: string,
     imageId: string,
     productImage: CreateProductImage,
+    jwt: string,
   ): Promise<ProductImage> {
     const response = await this.client.patch({
       url: `/product/${productId}/image/${imageId}`,
       data: productImage,
+      jwt,
     })
     return response as unknown as ProductImage
   }
 
-  async delete(productId: string, imageId: string): Promise<void> {
+  async delete(productId: string, imageId: string, jwt: string): Promise<void> {
     await this.client.delete({
       url: `/product/${productId}/image/${imageId}`,
+      jwt,
     })
   }
 }

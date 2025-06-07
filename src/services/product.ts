@@ -25,6 +25,7 @@ export class ProductService {
     priceRange,
     isVisible,
     id,
+    withPromo,
   }: ProductPaginationRequest): Promise<Pagination<ProductPresentation>> {
     const params = {
       page: page || 1,
@@ -39,6 +40,7 @@ export class ProductService {
         ? [priceRange?.min, priceRange?.max].join(',')
         : undefined,
       isVisible,
+      withPromo,
       id: id?.join(','),
     }
     const response = await this.client.get({

@@ -32,10 +32,12 @@ export class ProductPresentationService {
   async create(
     productId: string,
     productPresentation: CreateProductPresentation,
+    jwt: string,
   ): Promise<ProductPresentationResponse> {
     const response = await this.client.post({
       url: `/product/${productId}/presentation`,
       data: productPresentation,
+      jwt,
     })
 
     return response as unknown as ProductPresentationResponse
@@ -56,17 +58,24 @@ export class ProductPresentationService {
     productId: string,
     presentationId: string,
     productPresentation: Partial<CreateProductPresentation>,
+    jwt: string,
   ): Promise<ProductPresentationResponse> {
     const response = await this.client.patch({
       url: `/product/${productId}/presentation/${presentationId}`,
       data: productPresentation,
+      jwt,
     })
 
     return response as unknown as ProductPresentationResponse
   }
-  async delete(productId: string, presentationId: string): Promise<void> {
+  async delete(
+    productId: string,
+    presentationId: string,
+    jwt: string,
+  ): Promise<void> {
     await this.client.delete({
       url: `/product/${productId}/presentation/${presentationId}`,
+      jwt,
     })
   }
 
